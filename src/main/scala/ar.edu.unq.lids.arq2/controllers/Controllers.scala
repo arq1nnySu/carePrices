@@ -11,7 +11,7 @@ class ProductController extends AppController{
   }
 
   get("/product/:name") { request: Request =>
-    val name= request.params.getOrElse("name", "")
+    val name = request.params.getOrElse("name", "")
     response.ok.json(FakeData.products.find(_.name.toLowerCase.equals(name.toLowerCase)))
   }
 }

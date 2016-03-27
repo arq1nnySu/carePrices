@@ -1,13 +1,13 @@
-import com.typesafe.sbt.SbtNativePackager._
+//port com.typesafe.sbt.SbtNativePackager._
 
-packageArchetype.java_application
+//ckageArchetype.java_application
 
 organization := "ar.edu.unq.lids.arq2"
 name := "carePrices"
 version := "1.0"
 scalaVersion := "2.11.8"
-fork in run := true
-parallelExecution in ThisBuild := false
+//fork in run := true
+//parallelExecution in ThisBuild := false
 
 resolvers += "twttr" at "https://maven.twttr.com/"
 
