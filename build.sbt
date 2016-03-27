@@ -1,6 +1,6 @@
-//port com.typesafe.sbt.SbtNativePackager._
+import com.typesafe.sbt.SbtNativePackager._
 
-//ckageArchetype.java_application
+packageArchetype.java_application
 
 organization := "ar.edu.unq.lids.arq2"
 name := "carePrices"

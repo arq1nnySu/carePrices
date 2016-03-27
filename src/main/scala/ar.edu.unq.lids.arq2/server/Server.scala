@@ -11,10 +11,7 @@ trait AppController extends Controller
 
 object Server extends HttpServer {
 
-
   override val defaultFinatraHttpPort = ":" + Properties.envOrElse("PORT", "8081")
-
-
 
   override val disableAdminHttpServer = true
 
@@ -27,5 +24,3 @@ object Server extends HttpServer {
 
   }
 }
-
-
