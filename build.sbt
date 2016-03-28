@@ -25,5 +25,5 @@ libraryDependencies ++= Seq(
   "com.twitter.finatra" %% "finatra-httpclient" % versions.finatra,
   "ch.qos.logback" % "logback-classic" % versions.logback,
   "com.github.rlazoti" %% "finagle-metrics" % versions.finagleMetrics,
-  "com.newrelic.agent.java" % "newrelic-api" % versions.newrelic
+  "com.newrelic.agent.java" % "newrelic-agent" % versions.newrelic
 )
