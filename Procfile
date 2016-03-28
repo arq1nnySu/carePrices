@@ -1,1 +1,1 @@
-web: target/universal/stage/bin/carePrices -- -admin.port=:$PORT -http.port=:$PORT
+web: target/universal/stage/bin/carePrices
