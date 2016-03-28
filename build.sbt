@@ -17,11 +17,13 @@ lazy val versions = new {
   val guice = "4.0"
   val logback = "1.0.13"
   val finagleMetrics = "0.0.2"
+  val newrelic = "3.26.1"
 }
 
 libraryDependencies ++= Seq(
   "com.twitter.finatra" %% "finatra-http" % versions.finatra,
   "com.twitter.finatra" %% "finatra-httpclient" % versions.finatra,
   "ch.qos.logback" % "logback-classic" % versions.logback,
-  "com.github.rlazoti" %% "finagle-metrics" % versions.finagleMetrics
+  "com.github.rlazoti" %% "finagle-metrics" % versions.finagleMetrics,
+  "com.newrelic.agent.java" % "newrelic-api" % versions.newrelic
 )
