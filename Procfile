@@ -1,1 +1,1 @@
-web: target/universal/stage/bin/carePrices
+web: ./target/universal/stage/bin/carePrices
