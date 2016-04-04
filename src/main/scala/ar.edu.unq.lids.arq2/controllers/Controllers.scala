@@ -1,11 +1,8 @@
 package ar.edu.unq.lids.arq2.controllers
 
-import ar.edu.unq.lids.arq2.model.{ProductDTO, Resource}
 import ar.edu.unq.lids.arq2.server.AppController
-import ar.edu.unq.lids.arq2.service.ProductService
+import ar.edu.unq.lids.arq2.service.{ProductDTO, ProductService}
 import com.twitter.finagle.http.Request
-
-import scala.reflect._
 
 class ProductController extends AppController{
 
@@ -16,8 +13,7 @@ class ProductController extends AppController{
   }
 
   post("/products") { product: ProductDTO =>
-    service.save(product)
-    response.ok.json(service.all)
+    response.ok.json(service.save(product))
   }
 
   get("/product/:name") { request: Request =>
