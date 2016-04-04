@@ -2,20 +2,21 @@ package ar.edu.unq.lids.arq2
 
 import net.fwbrasil.activate.ActivateContext
 import net.fwbrasil.activate.storage.memory.TransientMemoryStorage
+import net.fwbrasil.activate.storage.mongo.async.AsyncMongoStorage
 
 // Initially, must be created the persistence context. It must be a singleton, so it makes sense to declare as "object".
 object CartePriceActivateContext extends ActivateContext {
 
-  val storage = new TransientMemoryStorage
+  //val storage = new TransientMemoryStorage
 
   //	val storage = new PrevaylerStorage
 
-//  	val storage = new AsyncMongoStorage  {
-//  		val host = "localhost"
-//  		override val port = 27017
-//  		val db = "dbName"
-//  		override val authentication = Option("user", "pass")
-  //	}
+  	val storage = new AsyncMongoStorage {
+  		val host = "localhost"
+  		override val port = 27017
+  		val db = "products"
+  		override val authentication = None //Option("user", "pass")
+  	}
 
   // val storage = new PooledJdbcRelationalStorage {
   // 	    val jdbcDriver = "com.mysql.jdbc.Driver"

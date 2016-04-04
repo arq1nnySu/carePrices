@@ -2,7 +2,7 @@ package ar.edu.unq.lids.arq2.model
 
 
 import ar.edu.unq.lids.arq2.CartePriceActivateContext._
-import com.sun.prism.PixelFormat.DataType
+//import com.sun.prism.PixelFormat.DataType
 import org.apache.commons.beanutils.BeanUtils
 import scala.beans.{BeanProperty, BeanInfo}
 import scala.reflect.ClassTag
