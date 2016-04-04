@@ -34,5 +34,7 @@ libraryDependencies ++= Seq(
   "net.fwbrasil" %% "activate-core" % versions.activateVersion,
   "net.fwbrasil" %% "activate-mongo-async" % versions.activateVersion,
   "net.fwbrasil" %% "activate-mongo" % versions.activateVersion,
-  "commons-beanutils" % "commons-beanutils" % "1.9.2"
+  "net.fwbrasil" %% "activate-jdbc" % versions.activateVersion,
+  "commons-beanutils" % "commons-beanutils" % "1.9.2",
+  "mysql" % "mysql-connector-java" % "5.1.16"
 )

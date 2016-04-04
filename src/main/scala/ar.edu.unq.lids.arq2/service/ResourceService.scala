@@ -1,7 +1,6 @@
 package ar.edu.unq.lids.arq2.service
 
-import ar.edu.unq.lids.arq2.CartePriceActivateContext
-import ar.edu.unq.lids.arq2.model.{DTO, Product, ProductDTO, Resource}
+import ar.edu.unq.lids.arq2.model.Product
 
 //import ar.edu.unq.lids.arq2.model.Product
 import ar.edu.unq.lids.arq2.CartePriceActivateContext._
@@ -17,7 +16,7 @@ class ResourceService[T<:Resource: ClassTag, D<:DTO[T]](implicit manifestT: Mani
   implicit def resourceToDTO(t:T) = t.toData(manifestD.runtimeClass.asInstanceOf[Class[DTO[T]]])
 
   def save(data:D) = transactional{
-    repository.save(data)
+    resourceToDTO(repository.save(data))
   }
 
   def all = transactional{
