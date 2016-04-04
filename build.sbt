@@ -9,8 +9,12 @@ scalaVersion := "2.11.8"
 fork in run := true
 parallelExecution in ThisBuild := false
 
-resolvers += "twttr" at "https://maven.twttr.com/"
+incOptions := incOptions.value.withNameHashing(false)
 
+resolvers += "twttr" at "https://maven.twttr.com/"
+resolvers += "fwbrasil.net" at "http://repo1.maven.org/maven2"
+resolvers += "Sonatype Snapshots" at "https://oss.sonatype.org/content/repositories/snapshots/"
+resolvers += "Typesafe repository" at "https://dl.bintray.com/typesafe/maven-releases/"
 
 lazy val versions = new {
   val finatra = "2.1.5"
@@ -18,6 +22,7 @@ lazy val versions = new {
   val logback = "1.0.13"
   val finagleMetrics = "0.0.2"
   val newrelic = "3.26.1"
+  val activateVersion = "1.7"
 }
 
 libraryDependencies ++= Seq(
@@ -25,5 +30,9 @@ libraryDependencies ++= Seq(
   "com.twitter.finatra" %% "finatra-httpclient" % versions.finatra,
   "ch.qos.logback" % "logback-classic" % versions.logback,
   "com.github.rlazoti" %% "finagle-metrics" % versions.finagleMetrics,
-  "com.newrelic.agent.java" % "newrelic-agent" % versions.newrelic
+  "com.newrelic.agent.java" % "newrelic-agent" % versions.newrelic,
+  "net.fwbrasil" %% "activate-core" % versions.activateVersion,
+  "net.fwbrasil" %% "activate-mongo-async" % versions.activateVersion,
+  "net.fwbrasil" %% "activate-mongo" % versions.activateVersion,
+  "commons-beanutils" % "commons-beanutils" % "1.9.2"
 )
