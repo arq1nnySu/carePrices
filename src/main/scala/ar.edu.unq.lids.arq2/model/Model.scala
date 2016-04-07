@@ -12,11 +12,13 @@ import ar.edu.unq.lids.arq2.service.Resource
 import scala.beans.BeanInfo
 
 @BeanInfo
-case class Product(var name: String, var barcode: String) extends Entity with Resource{
-  def this(){
-    this("", "")
-  }
+class Product extends Entity with Resource{
+  var name: String = _
+  var barcode: String = _
 }
 
-
-//class Price(var price:Double, var name:String) extends Entity with Resource
+@BeanInfo
+class Price extends Entity with Resource{
+  var price: Double = _
+  var name: String = _
+}

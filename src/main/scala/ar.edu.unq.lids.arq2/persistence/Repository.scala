@@ -15,10 +15,12 @@ class Repository[T<:Resource: ClassTag](implicit m: Manifest[T]) {
 
   def alll = all[T]
 
-//  def get(ff:(T)=>StatementSelectValue, value:StatementSelectValue): T = {
-//      query {
-//        (t: T) => where(ff(t) :== value) select (t)
-//      }.head
-//  }
+  def get(ff:(T)=>String, value:StatementSelectValue): T = {
+      query {
+        (t: T) => {
+          where(ff(t) :== value) select (t)
+        }
+      }.head
+  }
 
 }

@@ -8,7 +8,7 @@ import scala.beans.BeanInfo
 import scala.reflect.ClassTag
 
 trait Resource extends Entity{ self =>
-  def toData[T<:Resource](dto:Class[DTO[T]]) = dto.newInstance().toDTO(this.asInstanceOf[T])
+  def toData[T<:Resource](dto:Class[DTO[T]]):DTO[T] = dto.newInstance().toDTO(this.asInstanceOf[T])
 }
 
 abstract class DTO[T<:Resource: ClassTag](implicit manifest: Manifest[T]){
@@ -28,7 +28,7 @@ abstract class DTO[T<:Resource: ClassTag](implicit manifest: Manifest[T]){
 
 @BeanInfo
 class ProductDTO extends DTO[Product]{
-  var name: String =_
-  var barcode: String=_
-  var id:String =_
+  var name: String = _
+  var barcode: String = _
+  var id:String = _
 }

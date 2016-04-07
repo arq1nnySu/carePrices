@@ -1,35 +1,35 @@
 package ar.edu.unq.lids.arq2.service
 
 import ar.edu.unq.lids.arq2.model.Product
-
-//import ar.edu.unq.lids.arq2.model.Product
+import ar.edu.unq.lids.arq2.model.Price
 import ar.edu.unq.lids.arq2.CartePriceActivateContext._
 import ar.edu.unq.lids.arq2.persistence.Repository
+import net.fwbrasil.activate.statement.StatementSelectValue
 
 import scala.reflect.ClassTag
 
 class ResourceService[T<:Resource: ClassTag, D<:DTO[T]](implicit manifestT: Manifest[T], manifestD: Manifest[D]){
-
+  type Dto = DTO[T]
   var repository = new Repository[T]
 
   implicit def dtoToResource(dto:D) = dto.toResource()
-  implicit def resourceToDTO(t:T) = t.toData(manifestD.runtimeClass.asInstanceOf[Class[DTO[T]]])
+  implicit def resourceToDTO(t:T):Dto = t.toData(manifestD.runtimeClass.asInstanceOf[Class[Dto]])
 
-  def save(data:D) = transactional{
-    resourceToDTO(repository.save(data))
+  def save(data:D):Dto = transactional{
+    repository.save(data)
   }
 
   def all = transactional{
     repository.alll.map(resourceToDTO(_))
   }
-
 //  def get(id:String) = transactional{
-//    repository.get(_.id, id)
+//    resourceToDTO(repository.get(_.id, id))
 //  }
-//  def get(ff:(T)=>StatementSelectValue, value:StatementSelectValue) = transactional{
-//    repository.get(ff, value)
-//  }
+  def get(ff:(T)=>String, value:StatementSelectValue):Dto = transactional{
+    repository.get(ff, value)
+  }
 
 }
 
 class ProductService extends ResourceService[Product, ProductDTO]{}
+//class PriceService extends ResourceService[Price, ProductDTO]{}
