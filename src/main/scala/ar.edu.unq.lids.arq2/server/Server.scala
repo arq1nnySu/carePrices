@@ -9,8 +9,6 @@ import com.twitter.finatra.http.{Controller, HttpServer}
 import scala.util.Properties
 
 
-trait AppController extends Controller
-
 object Server extends HttpServer {
 
   transactional{

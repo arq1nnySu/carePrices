@@ -1,14 +1,12 @@
 package ar.edu.unq.lids.arq2.service
 
 import ar.edu.unq.lids.arq2.model.Product
-import ar.edu.unq.lids.arq2.model.Price
 import ar.edu.unq.lids.arq2.CartePriceActivateContext._
 import ar.edu.unq.lids.arq2.persistence.Repository
 import net.fwbrasil.activate.statement.StatementSelectValue
 
-import scala.reflect.ClassTag
 
-class ResourceService[T<:Resource: ClassTag, D<:DTO[T]](implicit manifestT: Manifest[T], manifestD: Manifest[D]){
+class ResourceService[T<:Resource, D<:DTO[T]](implicit manifestT: Manifest[T], manifestD: Manifest[D]){
   type Dto = DTO[T]
   var repository = new Repository[T]
 
@@ -22,9 +20,7 @@ class ResourceService[T<:Resource: ClassTag, D<:DTO[T]](implicit manifestT: Mani
   def all = transactional{
     repository.alll.map(resourceToDTO(_))
   }
-//  def get(id:String) = transactional{
-//    resourceToDTO(repository.get(_.id, id))
-//  }
+
   def get(ff:(T)=>String, value:StatementSelectValue):Dto = transactional{
     repository.get(ff, value)
   }

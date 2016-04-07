@@ -7,11 +7,9 @@ import net.fwbrasil.activate.statement.StatementSelectValue
 
 import scala.reflect.ClassTag
 
-class Repository[T<:Resource: ClassTag](implicit m: Manifest[T]) {
+class Repository[T<:Resource](implicit m: Manifest[T]) {
 
-  def save(t:T): T ={
-      t
-  }
+  def save(t:T) = t
 
   def alll = all[T]
 
