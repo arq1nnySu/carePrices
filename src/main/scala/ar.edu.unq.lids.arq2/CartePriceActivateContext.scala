@@ -21,7 +21,7 @@ object CartePriceActivateContext extends ActivateContext {
 		override val authentication = None
 	}
 
-	val mysqlStorage = new PooledJdbcRelationalStorage {
+	lazy val mysqlStorage = new PooledJdbcRelationalStorage {
 		val jdbcDriver = "com.mysql.jdbc.Driver"
 		val user = Some("root")
 		val password = Some("root")
@@ -29,7 +29,7 @@ object CartePriceActivateContext extends ActivateContext {
 		val dialect = mySqlDialect
 	}
 
-	val storage = Properties.envOrElse("storage", "mongo") match{
+	lazy val storage = Properties.envOrElse("storage", "mongo") match{
 		case "mongo" => mongoStorage
 		case "mysql" => mysqlStorage
 	}
