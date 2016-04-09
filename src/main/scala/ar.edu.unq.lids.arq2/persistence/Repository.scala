@@ -1,11 +1,8 @@
 package ar.edu.unq.lids.arq2.persistence
 
-import ar.edu.unq.lids.arq2.CartePriceActivateContext
-import CartePriceActivateContext._
+import ar.edu.unq.lids.arq2.CartePriceActivateContext._
 import ar.edu.unq.lids.arq2.service.Resource
 import net.fwbrasil.activate.statement.StatementSelectValue
-
-import scala.reflect.ClassTag
 
 class Repository[T<:Resource](implicit m: Manifest[T]) {
 
