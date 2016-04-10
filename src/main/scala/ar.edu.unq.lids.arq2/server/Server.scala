@@ -14,7 +14,8 @@ object Server extends HttpServer {
 
   transactional{
   }
-  override val defaultFinatraHttpPort = ":" + Properties.envOrElse("PORT", "8081")
+
+  override val defaultFinatraHttpPort = ":" + Properties.envOrElse("PORT", "80")
 
   override val disableAdminHttpServer = true
 

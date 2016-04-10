@@ -1,6 +1,7 @@
 package ar.edu.unq.lids.arq2
 
 import net.fwbrasil.activate.ActivateContext
+import net.fwbrasil.activate.storage.memory.TransientMemoryStorage
 import net.fwbrasil.activate.storage.mongo.async.AsyncMongoStorage
 import net.fwbrasil.activate.storage.relational.PooledJdbcRelationalStorage
 import net.fwbrasil.activate.storage.relational.idiom.mySqlDialect
@@ -10,7 +11,7 @@ import scala.util.Properties
 // Initially, must be created the persistence context. It must be a singleton, so it makes sense to declare as "object".
 object CartePriceActivateContext extends ActivateContext {
 
-	//val storage = new TransientMemoryStorage
+
 
 	//val storage = new PrevaylerStorage
 
@@ -29,9 +30,12 @@ object CartePriceActivateContext extends ActivateContext {
 		val dialect = mySqlDialect
 	}
 
-	lazy val storage = Properties.envOrElse("storage", "mongo") match{
+	val transientStorage = new TransientMemoryStorage
+
+	lazy val storage = Properties.envOrElse("storage", "transient") match{
 		case "mongo" => mongoStorage
 		case "mysql" => mysqlStorage
+		case "transient" => transientStorage
 	}
 
 	//	val storage = new PooledJdbcRelationalStorage {

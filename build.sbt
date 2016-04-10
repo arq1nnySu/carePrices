@@ -26,6 +26,9 @@ lazy val versions = new {
 }
 
 libraryDependencies ++= Seq(
+  "org.scala-lang" % "scala-compiler" % "2.11.8",
+  "org.scala-lang.modules" %% "scala-xml" % "1.0.5",
+  "commons-beanutils" % "commons-beanutils" % "1.9.2",
   "com.twitter.finatra" %% "finatra-http" % versions.finatra,
   "com.twitter.finatra" %% "finatra-httpclient" % versions.finatra,
   "ch.qos.logback" % "logback-classic" % versions.logback,
