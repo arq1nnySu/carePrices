@@ -1,5 +1,7 @@
 package ar.edu.unq.lids.arq2.service
 
+import java.lang.Double
+
 import ar.edu.unq.lids.arq2.CartePriceActivateContext._
 import ar.edu.unq.lids.arq2.model.{Product, Shop, Price}
 import com.twitter.finatra.request.QueryParam
@@ -12,7 +14,7 @@ import scala.reflect.ClassTag
 trait Resource extends Entity{ self =>
   def toData[T<:Resource](dto:Class[DTO[T]]):DTO[T] = dto.newInstance().toDTO(this.asInstanceOf[T])
 
-  override def toString() = id
+//  override def toString() = id
 }
 
 abstract class DTO[T<:Resource: ClassTag](implicit manifest: Manifest[T]){
@@ -54,10 +56,23 @@ class ShopDTO extends DTO[Shop]{
   //@Max(100)
   //@PastDate
 
-  @QueryParam var latitude: Option[Double] = _
-  @QueryParam var longitude: Option[Double] = _
-  @QueryParam var name: Option[String] = _
-  @QueryParam var address: Option[String] = _
-  @QueryParam var location : Option[String] = _
+  var latitude: Double = _
+  var longitude: Double = _
+  var name: String = _
+  var address: String = _
+  var location : String = _
   var id: String = _
 }
+
+//TODO Mergear el ShopRequest Con el ShopDTO
+// El problema son los options
+@BeanInfo
+case class ShopRequest(
+  @QueryParam var latitude: Option[Double],
+  @QueryParam var longitude: Option[Double],
+  @QueryParam var name: Option[String],
+  @QueryParam var address: Option[String],
+  @QueryParam var location : Option[String]
+)
+
+
