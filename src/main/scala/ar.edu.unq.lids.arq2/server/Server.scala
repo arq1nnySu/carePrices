@@ -1,6 +1,7 @@
 package ar.edu.unq.lids.arq2.server
 
 import ar.edu.unq.lids.arq2.CartePriceActivateContext._
+import ar.edu.unq.lids.arq2._
 import ar.edu.unq.lids.arq2.controllers.ProductController
 import com.twitter.finagle.http.{Request, Response}
 import com.twitter.finatra.http.HttpServer
@@ -15,7 +16,7 @@ object Server extends HttpServer {
   transactional{
   }
 
-  override val defaultFinatraHttpPort = ":" + Properties.envOrElse("PORT", "80")
+  override val defaultFinatraHttpPort = configuration.server.port
 
   override val disableAdminHttpServer = true
 

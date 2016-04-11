@@ -16,23 +16,23 @@ object CartePriceActivateContext extends ActivateContext {
 	//val storage = new PrevaylerStorage
 
 	val mongoStorage = new AsyncMongoStorage {
-		val host = "localhost"
-		override val port = 27017
-		val db = "products"
-		override val authentication = None
+		val host = configuration.database.mongo.host
+		override val port = configuration.database.mongo.port
+		val db = configuration.database.mongo.db
+		override val authentication = configuration.database.mongo.authentication
 	}
 
 	lazy val mysqlStorage = new PooledJdbcRelationalStorage {
 		val jdbcDriver = "com.mysql.jdbc.Driver"
-		val user = Some("root")
-		val password = Some("root")
-		val url = "jdbc:mysql://localhost:8889/activate_test"
+		val user = configuration.database.mysql.user
+		val password = configuration.database.mysql.password
+		val url = configuration.database.mysql.url
 		val dialect = mySqlDialect
 	}
 
 	val transientStorage = new TransientMemoryStorage
 
-	lazy val storage = Properties.envOrElse("storage", "transient") match{
+	lazy val storage = configuration.database.storage match{
 		case "mongo" => mongoStorage
 		case "mysql" => mysqlStorage
 		case "transient" => transientStorage
