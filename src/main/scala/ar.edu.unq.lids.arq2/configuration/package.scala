@@ -21,7 +21,6 @@ package object configuration {
     val storage = Properties.envOrElse("storage", "transient")
     val fillData = Properties.envOrNone("fill_data").map(_=>false).getOrElse(true)
 
-
     object mongo {
       val host = Properties.envOrElse("mongo_host", "localhost")
       val port = Properties.envOrElse("mongo_posts", "27017").toInt

@@ -2,7 +2,7 @@ package ar.edu.unq.lids.arq2.server
 
 import ar.edu.unq.lids.arq2.CartePriceActivateContext._
 import ar.edu.unq.lids.arq2._
-import ar.edu.unq.lids.arq2.controllers.ResourceController
+import ar.edu.unq.lids.arq2.controllers.{PriceController, ShopController, ProductController, ResourceController}
 import com.twitter.finagle.http.{Request, Response}
 import com.twitter.finatra.http.HttpServer
 import com.twitter.finatra.http.filters.{CommonFilters, LoggingMDCFilter, TraceIdMDCFilter}
@@ -24,7 +24,9 @@ object Server extends HttpServer {
       .filter[LoggingMDCFilter[Request, Response]]
       .filter[TraceIdMDCFilter[Request, Response]]
       .filter[CommonFilters]
-      controllers.foreach(controller => router.add(controller.newInstance()))
+      .add[ProductController]
+      .add[ShopController]
+      .add[PriceController]
   }
 
   def controllers = {
