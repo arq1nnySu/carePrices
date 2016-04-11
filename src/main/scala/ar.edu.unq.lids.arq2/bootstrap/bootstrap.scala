@@ -1,12 +1,13 @@
-import ar.edu.unq.lids.arq2.model.Product
+package ar.edu.unq.lids.arq2.bootstrap
+import ar.edu.unq.lids.arq2.model.{Price, Shop, Product}
 //import com.twitter.finatra.http.HttpServer
 import ar.edu.unq.lids.arq2.CartePriceActivateContext._
 
 object bootstrap  {
 
-  transactional {
-    new Product()("Tostadas Riera", "4646")
-    new Product("Jugo Tang", "7868678")
+  def data {
+    val p1 = new Product("Tostadas Riera", "4646")
+    val p2 = new Product("Jugo Tang", "7868678")
     new Product("Té Manzanilla", "24242")
     new Product("Arroz Molinos Ala", "345656")
     new Product("Pure de Tomate Molto", "353453")
@@ -29,5 +30,12 @@ object bootstrap  {
     new Product("Sal Fina11 Dos Anclas", "343535")
     new Product("Mayonesa Natura", "46456456")
     new Product("Galletitas Don Satur", "456565")
+
+    val shop1 = new Shop(0D, 0, "Chino de casa", "shangay", "Bernal")
+    val shop2= new Shop(0D, 0, "Verduleria 2 personas y un boliviano", "Av. Siempre viva", "Cronica")
+
+    new Price(shop1, p1, 20, "")
+    new Price(shop2, p1, 25, "")
+    new Price(shop1, p2, 10, "")
   }
 }

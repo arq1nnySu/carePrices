@@ -2,7 +2,7 @@ package ar.edu.unq.lids.arq2.server
 
 import ar.edu.unq.lids.arq2.CartePriceActivateContext._
 import ar.edu.unq.lids.arq2._
-import ar.edu.unq.lids.arq2.controllers.{PriceController, ProductController, ResourceController, ShopController}
+import ar.edu.unq.lids.arq2.controllers.ResourceController
 import com.twitter.finagle.http.{Request, Response}
 import com.twitter.finatra.http.HttpServer
 import com.twitter.finatra.http.filters.{CommonFilters, LoggingMDCFilter, TraceIdMDCFilter}
@@ -12,6 +12,7 @@ import org.clapper.classutil.ClassFinder
 object Server extends HttpServer {
 
   transactional{
+    if(configuration.database.fillData) bootstrap.bootstrap.data
   }
 
   override val defaultFinatraHttpPort = configuration.server.port
