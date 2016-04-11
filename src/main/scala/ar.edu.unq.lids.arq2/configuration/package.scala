@@ -16,7 +16,10 @@ package object configuration {
       val host = Properties.envOrElse("mongo_host", "localhost")
       val port = Properties.envOrElse("mongo_posts", "27017").toInt
       val db = Properties.envOrElse("mongo_db", "products")
-      val authentication = Properties.envOrNone("mongo_auth")
+      val authentication = Properties.envOrNone("mongo_auth").map(auth => {
+        val split = auth.split(",")
+        (split.head, split.last)
+      })
     }
 
     object mysql{
