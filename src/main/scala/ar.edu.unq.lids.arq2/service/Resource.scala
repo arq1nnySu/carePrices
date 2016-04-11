@@ -2,6 +2,7 @@ package ar.edu.unq.lids.arq2.service
 
 import ar.edu.unq.lids.arq2.CartePriceActivateContext._
 import ar.edu.unq.lids.arq2.model.{Product, Shop, Price}
+import com.twitter.finatra.request.QueryParam
 import com.newrelic.agent.deps.com.google.gson.Gson
 import org.apache.commons.beanutils.BeanUtils
 
@@ -49,10 +50,14 @@ class PriceDTO extends DTO[Price]{
 
 @BeanInfo
 class ShopDTO extends DTO[Shop]{
-  var latitude: Double = _
-  var longitude: Double = _
-  var name: String = _
-  var address: String = _
-  var location : String = _
+
+  //@Max(100)
+  //@PastDate
+
+  @QueryParam var latitude: Option[Double] = _
+  @QueryParam var longitude: Option[Double] = _
+  @QueryParam var name: Option[String] = _
+  @QueryParam var address: Option[String] = _
+  @QueryParam var location : Option[String] = _
   var id: String = _
 }
