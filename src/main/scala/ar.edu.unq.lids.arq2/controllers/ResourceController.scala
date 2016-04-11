@@ -5,7 +5,7 @@ import ar.edu.unq.lids.arq2.service._
 import com.twitter.finagle.http.Request
 import com.twitter.finatra.http.Controller
 
-class ResourceController[T <: Resource, D <:DTO[T]](implicit manifestT: Manifest[T], manifestD: Manifest[D]) extends Controller{
+abstract class ResourceController[T <: Resource, D <:DTO[T]](implicit manifestT: Manifest[T], manifestD: Manifest[D]) extends Controller{
   val service = new ResourceService[T, D]{}
 
   def all =  { request: Request =>

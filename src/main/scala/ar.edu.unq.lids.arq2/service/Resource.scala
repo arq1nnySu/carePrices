@@ -3,6 +3,7 @@ package ar.edu.unq.lids.arq2.service
 import ar.edu.unq.lids.arq2.CartePriceActivateContext._
 import ar.edu.unq.lids.arq2.model.{Product, Shop, Price}
 import com.twitter.finatra.request.QueryParam
+import com.newrelic.agent.deps.com.google.gson.Gson
 import org.apache.commons.beanutils.BeanUtils
 
 import scala.beans.BeanInfo
@@ -10,6 +11,8 @@ import scala.reflect.ClassTag
 
 trait Resource extends Entity{ self =>
   def toData[T<:Resource](dto:Class[DTO[T]]):DTO[T] = dto.newInstance().toDTO(this.asInstanceOf[T])
+
+  override def toString() = id
 }
 
 abstract class DTO[T<:Resource: ClassTag](implicit manifest: Manifest[T]){
@@ -24,6 +27,8 @@ abstract class DTO[T<:Resource: ClassTag](implicit manifest: Manifest[T]){
     BeanUtils.copyProperties(this, t)
     this
   }
+
+  override def toString() = new Gson().toJson(this)
 
 }
 

@@ -38,6 +38,7 @@ class Product extends Entity with Resource{
     this.name = name
     this.barcode = barcode
   }
+
 }
 
 @BeanInfo
