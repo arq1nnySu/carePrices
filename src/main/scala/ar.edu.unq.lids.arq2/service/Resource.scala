@@ -1,7 +1,10 @@
 package ar.edu.unq.lids.arq2.service
 
+import java.lang.Double
+
 import ar.edu.unq.lids.arq2.CartePriceActivateContext._
 import ar.edu.unq.lids.arq2.model.{Product, Shop, Price}
+import com.fasterxml.jackson.annotation.{JsonProperty, JsonIgnore}
 import com.twitter.finatra.request.QueryParam
 import com.newrelic.agent.deps.com.google.gson.Gson
 import org.apache.commons.beanutils.BeanUtils
@@ -41,8 +44,8 @@ class ProductDTO extends DTO[Product]{
 
 @BeanInfo
 class PriceDTO extends DTO[Price]{
-  var shop: String = _
-  var product: String = _ // GS1 code
+  @JsonProperty("shop_id") var shop: String = _
+  @JsonProperty("product_id") var product: String = _ // GS1 code
   var price: Double = _
   var datetime: String = _
   var id: String = _
@@ -50,14 +53,22 @@ class PriceDTO extends DTO[Price]{
 
 @BeanInfo
 class ShopDTO extends DTO[Shop]{
-
-  //@Max(100)
-  //@PastDate
-
-  @QueryParam var latitude: Option[Double] = _
-  @QueryParam var longitude: Option[Double] = _
-  @QueryParam var name: Option[String] = _
-  @QueryParam var address: Option[String] = _
-  @QueryParam var location : Option[String] = _
+  var latitude: Double = _
+  var longitude: Double = _
+  var name: String = _
+  var address: String = _
+  var location : String = _
   var id: String = _
 }
+
+//TODO Mergear el ShopRequest Con el ShopDTO
+// El problema son los options
+case class ShopSearchRequest(
+  @QueryParam latitude: Option[Double],
+  @QueryParam longitude: Option[Double],
+  @QueryParam name: Option[String],
+  @QueryParam address: Option[String],
+  @QueryParam location : Option[String]
+)
+
+

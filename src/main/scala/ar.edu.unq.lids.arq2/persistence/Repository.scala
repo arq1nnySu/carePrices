@@ -1,8 +1,10 @@
 package ar.edu.unq.lids.arq2.persistence
 
+import java.io.Serializable
+
 import ar.edu.unq.lids.arq2.CartePriceActivateContext._
 import ar.edu.unq.lids.arq2.service.Resource
-import net.fwbrasil.activate.statement.StatementSelectValue
+import net.fwbrasil.activate.statement.{Criteria, StatementSelectValue}
 
 class Repository[T<:Resource](implicit m: Manifest[T]) {
 
@@ -16,6 +18,15 @@ class Repository[T<:Resource](implicit m: Manifest[T]) {
           where(ff(t) :== value) select (t)
         }
       }.head
+  }
+
+  def filter(filters:List[((T)=>Serializable, Option[Serializable])]): List[T] = {
+    select[T] where( t => filter(t, filters) )
+  }
+
+  protected def filter(t:T, filters:List[((T)=>Serializable, Option[Serializable])])={
+    val criterias = filters.collect{ case (property, Some(value)) => property(t) :== value}
+    criterias.reduce[Criteria]((c1, c2) => (c1 :&& c2).asInstanceOf[Criteria])
   }
 
 }

@@ -31,7 +31,8 @@ libraryDependencies ++= Seq(
   "commons-beanutils" % "commons-beanutils" % "1.9.2",
   "com.twitter.finatra" %% "finatra-http" % versions.finatra,
   "com.twitter.finatra" %% "finatra-httpclient" % versions.finatra,
-  "ch.qos.logback" % "logback-classic" % versions.logback,
+  "com.twitter.finatra" %% "finatra-slf4j" % versions.finatra,
+  "com.twitter.finatra" %% "finatra-jackson"  % versions.finatra,
   "com.github.rlazoti" %% "finagle-metrics" % versions.finagleMetrics,
   "com.newrelic.agent.java" % "newrelic-agent" % versions.newrelic,
   "net.fwbrasil" %% "activate-core" % versions.activateVersion,
@@ -40,5 +41,6 @@ libraryDependencies ++= Seq(
   "net.fwbrasil" %% "activate-jdbc" % versions.activateVersion,
   "commons-beanutils" % "commons-beanutils" % "1.9.2",
   "mysql" % "mysql-connector-java" % "5.1.16",
-  "org.clapper" %% "classutil" % "1.0.8"
+  "com.logentries" % "logentries-appender" % "1.1.32",
+  "log4j" % "log4j" % "1.2.17"
 )
