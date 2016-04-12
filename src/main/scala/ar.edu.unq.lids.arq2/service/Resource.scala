@@ -4,6 +4,7 @@ import java.lang.Double
 
 import ar.edu.unq.lids.arq2.CartePriceActivateContext._
 import ar.edu.unq.lids.arq2.model.{Product, Shop, Price}
+import com.fasterxml.jackson.annotation.{JsonProperty, JsonIgnore}
 import com.twitter.finatra.request.QueryParam
 import com.newrelic.agent.deps.com.google.gson.Gson
 import org.apache.commons.beanutils.BeanUtils
@@ -14,7 +15,7 @@ import scala.reflect.ClassTag
 trait Resource extends Entity{ self =>
   def toData[T<:Resource](dto:Class[DTO[T]]):DTO[T] = dto.newInstance().toDTO(this.asInstanceOf[T])
 
-//  override def toString() = id
+  override def toString() = id
 }
 
 abstract class DTO[T<:Resource: ClassTag](implicit manifest: Manifest[T]){
@@ -43,8 +44,8 @@ class ProductDTO extends DTO[Product]{
 
 @BeanInfo
 class PriceDTO extends DTO[Price]{
-  var shop: String = _
-  var product: String = _ // GS1 code
+  @JsonProperty("shop_id") var shop: String = _
+  @JsonProperty("product_id") var product: String = _ // GS1 code
   var price: Double = _
   var datetime: String = _
   var id: String = _
@@ -52,10 +53,6 @@ class PriceDTO extends DTO[Price]{
 
 @BeanInfo
 class ShopDTO extends DTO[Shop]{
-
-  //@Max(100)
-  //@PastDate
-
   var latitude: Double = _
   var longitude: Double = _
   var name: String = _
@@ -66,13 +63,12 @@ class ShopDTO extends DTO[Shop]{
 
 //TODO Mergear el ShopRequest Con el ShopDTO
 // El problema son los options
-@BeanInfo
-case class ShopRequest(
-  @QueryParam var latitude: Option[Double],
-  @QueryParam var longitude: Option[Double],
-  @QueryParam var name: Option[String],
-  @QueryParam var address: Option[String],
-  @QueryParam var location : Option[String]
+case class ShopSearchRequest(
+  @QueryParam latitude: Option[Double],
+  @QueryParam longitude: Option[Double],
+  @QueryParam name: Option[String],
+  @QueryParam address: Option[String],
+  @QueryParam location : Option[String]
 )
 
 

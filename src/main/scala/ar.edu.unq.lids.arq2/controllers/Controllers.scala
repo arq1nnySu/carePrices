@@ -41,7 +41,7 @@ class PriceController extends ResourceController[Price, PriceDTO]{
 class ShopController extends ResourceController[Shop, ShopDTO]{
   override val service = new ShopService
 
-  get("/shops"){ request: ShopRequest =>
+  get("/shops"){ request: ShopSearchRequest =>
     response.ok.json(service.search(request))
   }
 

@@ -23,8 +23,9 @@ class PriceService extends ResourceService[Price, PriceDTO] {
 
 class ShopService extends ResourceService[Shop, ShopDTO]{
 
-  def search(request: ShopRequest) = {
+  def search(request: ShopSearchRequest) = {
     filter(List[((Shop)=>Serializable, Option[Serializable])](
+      (s=> "1", Some("1")),
       (_.location, request.location),
       (_.name, request.name),
       (_.address, request.address),
