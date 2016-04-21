@@ -24,7 +24,7 @@ package object configuration {
     object mongo {
       val host = Properties.envOrElse("mongo_host", "localhost")
       val port = Properties.envOrElse("mongo_posts", "27017").toInt
-      val db = Properties.envOrElse("mongo_db", "products")
+      val db = Properties.envOrElse("mongo_db", "careprices")
       val authentication = Properties.envOrNone("mongo_auth").map(auth => {
         val split = auth.split(",")
         (split.head, split.last)
@@ -35,6 +35,11 @@ package object configuration {
       val user = Properties.envOrSome("mysql_user", Some("root"))
       val password = Properties.envOrSome("mysql_pwd", Some("root"))
       val url = Properties.envOrElse("mysql_url", "jdbc:mysql://localhost:8889/activate_test")
+    }
+
+    object redis{
+      val host = Properties.envOrElse("redis_host", "localhost")
+      val port = Properties.envOrElse("redis_port", "6379").toInt
     }
   }
 
