@@ -4,10 +4,10 @@
 * [Heroku](http://careprices.herokuapp.com) - Servidor hosteado en Heroku.
 * [Amazon](http://careprices.passto.com.ar) - Servidor hosteado en Amazon.
 
-## Documencación de la API:
+## Documentación de la API:
 * [API](http://docs.careprices.apiary.io/#reference/0/product/create-a-new-product?console=1)
 
-## Stack elegido
+## Stack elegído
 
  * [SBT](http://www.scala-sbt.org)  - Build Tools
  * [Scala](http://www.scala-lang.org) - Lenguaje
@@ -21,7 +21,7 @@
 * [Redis](http://redis.io) - Como cache
 
 
-## Congiguración
+## Configuración
 
 Tenemos un package object que tiene la configuracion de toda la aplicación.
 Muchas de esas configuraciones se leen de variables de entorno (aunque tienen un valor por default)
@@ -145,4 +145,3 @@ Para utilizar Redis necesitamos configurar:
      val port = Properties.envOrElse("redis_port", "6379")
     ```
 
-    
