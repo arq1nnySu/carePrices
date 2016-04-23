@@ -2,7 +2,8 @@
 
 ## Instancias
 * [Heroku](http://careprices.herokuapp.com) - Servidor hosteado en Heroku.
-* [Amazon](http://careprices.passto.com.ar) - Servidor hosteado en Amazon.
+* [Amazon](http://careprices.boletius.com) - Servidor hosteado en Amazon.
+* [Docker](https://hub.docker.com/r/nnysu/careprices) - Docker Image
 
 ## Documentación de la API:
 * [API](http://docs.careprices.apiary.io/#reference/0/product/create-a-new-product?console=1)
@@ -145,3 +146,9 @@ Para utilizar Redis necesitamos configurar:
      val port = Properties.envOrElse("redis_port", "6379")
     ```
 
+
+### Docker
+
+Tenemos una imagen docker con las siguientes catacterísticas:
+* Centos
+* Java 8
