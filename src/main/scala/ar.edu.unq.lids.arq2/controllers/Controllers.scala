@@ -28,8 +28,12 @@ class ProductController extends ResourceController[Product, ProductDTO]{
 @Singleton
 class PriceController extends ResourceController[Price, PriceDTO]{
   override val service = new PriceService
+  val cacheService  =  new CacheService
 
-  get("/found-prices")(all)
+  get("/found-prices"){ request: Request =>
+    response.ok.json((cacheService.memorize("prices"){service.all}))
+  }
+
   post("/found-prices"){ price: PriceDTO =>
     val id = service.savePrice(price).id
     response.created.location(s"/found-prices/$id")
