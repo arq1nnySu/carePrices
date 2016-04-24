@@ -18,4 +18,4 @@ assemblyMergeStrategy in assembly := {
       case y => y
     }
 }
-assemblyOutputPath in assembly := new File("target/carePrices.jar")
+assemblyOutputPath in assembly := new File("docker/carePrices.jar")
