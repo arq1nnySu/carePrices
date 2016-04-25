@@ -4,9 +4,11 @@ import java.lang.Double
 
 import ar.edu.unq.lids.arq2.CartePriceActivateContext._
 import ar.edu.unq.lids.arq2.model.{Product, Shop, Price}
-import com.fasterxml.jackson.annotation.{JsonProperty, JsonIgnore}
+import com.fasterxml.jackson.annotation.JsonProperty
+import com.twitter.finatra.json.internal.caseclass.validation.validators.NotEmptyInternal
 import com.twitter.finatra.request.QueryParam
 import com.newrelic.agent.deps.com.google.gson.Gson
+import com.twitter.finatra.validation.{ErrorCode, ValidationResult, MethodValidation}
 import org.apache.commons.beanutils.BeanUtils
 
 import scala.beans.BeanInfo
@@ -60,6 +62,12 @@ class ShopDTO extends DTO[Shop]{
   var location : String = _
   var id: String = _
 }
+
+case class ShopTest(
+  @NotEmptyInternal name: String,
+  @NotEmptyInternal address: String,
+  @NotEmptyInternal location: String
+  )
 
 //TODO Mergear el ShopRequest Con el ShopDTO
 // El problema son los options

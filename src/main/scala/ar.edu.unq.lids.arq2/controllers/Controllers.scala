@@ -20,9 +20,9 @@ class ServerController extends Controller{
 
 @Singleton
 class ProductController extends ResourceController[Product, ProductDTO]{
-  get("/product")(all)
-  post("/product")(save)
-  get("/product/:id") (byId)
+  get("/products")(all)
+  post("/products")(save)
+  get("/products/:id") (byId)
 }
 
 @Singleton
@@ -49,4 +49,6 @@ class ShopController extends ResourceController[Shop, ShopDTO]{
   }
 
   post("/shops")(save)
+  //post("/shops"){request: ShopTest =>
+  //  response.ok.json(request)}
 }
