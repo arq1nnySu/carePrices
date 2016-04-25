@@ -4,11 +4,12 @@ import java.lang.Double
 
 import ar.edu.unq.lids.arq2.CartePriceActivateContext._
 import ar.edu.unq.lids.arq2.model.{Product, Shop, Price}
+import ar.edu.unq.lids.arq2.utils.ScalaBeanUtils
 import com.fasterxml.jackson.annotation.{JsonProperty, JsonIgnore}
 import com.twitter.finatra.request.QueryParam
 import com.newrelic.agent.deps.com.google.gson.Gson
 import org.apache.commons.beanutils.BeanUtils
-
+import scala.reflect.runtime.{universe => ru}
 import scala.beans.BeanInfo
 import scala.reflect.ClassTag
 
@@ -22,12 +23,12 @@ abstract class DTO[T<:Resource: ClassTag](implicit manifest: Manifest[T]){
 
   def toResource(): T ={
     val t = manifest.runtimeClass.newInstance().asInstanceOf[T]
-    BeanUtils.copyProperties(t, this)
+    ScalaBeanUtils.copy(this, t)
     t
   }
 
   def toDTO(t:T):DTO[T] ={
-    BeanUtils.copyProperties(this, t)
+    ScalaBeanUtils.copy(t, this)
     this
   }
 
@@ -52,7 +53,7 @@ class PriceDTO extends DTO[Price]{
 }
 
 @BeanInfo
-class ShopDTO extends DTO[Shop]{
+class ShopDTOff extends DTO[Shop]{
   var latitude: Double = _
   var longitude: Double = _
   var name: String = _
@@ -63,12 +64,12 @@ class ShopDTO extends DTO[Shop]{
 
 //TODO Mergear el ShopRequest Con el ShopDTO
 // El problema son los options
-case class ShopSearchRequest(
-  @QueryParam latitude: Option[Double],
-  @QueryParam longitude: Option[Double],
-  @QueryParam name: Option[String],
-  @QueryParam address: Option[String],
-  @QueryParam location : Option[String]
-)
+case class ShopDTO(@QueryParam var latitude: Option[Double]= None,
+@QueryParam var longitude: Option[Double]=None,
+@QueryParam var name: Option[String]=None,
+@QueryParam var address: Option[String]=None,
+@QueryParam var location : Option[String]=None,
+@QueryParam var id : Option[String] =None) extends DTO[Shop]{
+}
 
 

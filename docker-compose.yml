@@ -4,4 +4,10 @@ services:
   web:
     build: docker
     ports:
-      - "8081:80"
+      - "9200:9200"
+    depends_on:
+      - redis
+  redis:
+      image: redis
+      ports:
+        - "6379:6379"

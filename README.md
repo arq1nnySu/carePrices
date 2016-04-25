@@ -65,7 +65,13 @@ package object configuration {
 
 
 ## Ejecución
-Para la ejecución hay que ejecutar el object `Server`.
+* Desde **IntelliJ**:\
+    Para la ejecución hay que ejecutar el object `Server`.
+* Desde la consola:\
+    Correr el comando  ```sbt assembly ``` que generra el archivo     `carePrices.jar`. Una vez generado se puede correr el jar ejecutando: `java -jar carePrices.jar`
+
+
+
 
 #### Con la configuración por default
 Por default el servidor va a escuchar el puerto `8081`. \
@@ -132,8 +138,10 @@ Si queremos utilizar mongo hay que configurar:
     ```
 
 ### Redis
-Estamos usando **Redis** como cache de algunos recursos. Todavia no esta muy bien definido hasta que tengamos mas avanzado el TP. Por ahora lo usamos en un solo servicio. \
-Si no tiene una conección con el servicio de Redis el servicio ejecuta el código  que genera el valor original. Es decir si no tenemos un servicio de Redis la aplicación sigue funcionando.
+Estamos usando **Redis** como cache de algunos recursos. Todavia no esta muy bien definido hasta que tengamos mas avanzado el TP. 
+Por ahora lo usamos en un solo servicio, el de precios.
+Si no hay un servidor de redis, no pasa nada, se ignora la chaché y se ejecuta el código original.  
+Es decir si no tenemos un servicio de Redis la aplicación sigue funcionando.
 
 Para utilizar Redis necesitamos configurar:
 
