@@ -3,13 +3,13 @@ package ar.edu.unq.lids.arq2.service
 import java.lang.Double
 
 import ar.edu.unq.lids.arq2.CartePriceActivateContext._
-import ar.edu.unq.lids.arq2.model.{Product, Shop, Price}
+import ar.edu.unq.lids.arq2.model.{Price, Product, Shop}
 import ar.edu.unq.lids.arq2.utils.ScalaBeanUtils
-import com.fasterxml.jackson.annotation.{JsonProperty, JsonIgnore}
-import com.twitter.finatra.request.QueryParam
+import com.fasterxml.jackson.annotation.JsonProperty
 import com.newrelic.agent.deps.com.google.gson.Gson
-import org.apache.commons.beanutils.BeanUtils
-import scala.reflect.runtime.{universe => ru}
+import com.twitter.finatra.json.internal.caseclass.validation.validators.NotEmptyInternal
+import com.twitter.finatra.request.QueryParam
+
 import scala.beans.BeanInfo
 import scala.reflect.ClassTag
 
@@ -61,6 +61,12 @@ class ShopDTOff extends DTO[Shop]{
   var location : String = _
   var id: String = _
 }
+
+case class ShopTest(
+  @NotEmptyInternal name: String,
+  @NotEmptyInternal address: String,
+  @NotEmptyInternal location: String
+  )
 
 //TODO Mergear el ShopRequest Con el ShopDTO
 // El problema son los options

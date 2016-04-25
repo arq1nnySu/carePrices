@@ -13,7 +13,7 @@ class PriceService extends ResourceService[Price, PriceDTO] {
   var productRepository = new Repository[Product]
   var shopRepository = new Repository[Shop]
 
-  def savePrice(pricedto: PriceDTO): Dto = transactional {
+  def savePrice(pricedto: PriceDTO): Price = transactional {
     val product = productRepository.get(_.barcode,pricedto.product)
     val shop = shopRepository.get(_.id, pricedto.shop)
     val price = new Price(shop, product, pricedto.price, pricedto.datetime)
