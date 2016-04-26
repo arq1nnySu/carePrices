@@ -138,9 +138,9 @@ Si queremos utilizar mongo hay que configurar:
     ```
 
 ### Redis
-Estamos usando **Redis** como cache de algunos recursos. Todavia no esta muy bien definido hasta que tengamos mas avanzado el TP. 
+Estamos usando **Redis** como cache de algunos recursos. Todavia no esta muy bien definido hasta que tengamos mas avanzado el TP.
 Por ahora lo usamos en un solo servicio, el de precios.
-Si no hay un servidor de redis, no pasa nada, se ignora la chaché y se ejecuta el código original.  
+Si no hay un servidor de redis, no pasa nada, se ignora la chaché y se ejecuta el código original.
 Es decir si no tenemos un servicio de Redis la aplicación sigue funcionando.
 
 Para utilizar Redis necesitamos configurar:
@@ -157,6 +157,19 @@ Para utilizar Redis necesitamos configurar:
 
 ### Docker
 
-Tenemos una imagen docker con las siguientes catacterísticas:
-* Centos
+Nuestra app corre en una imagen docker con las siguientes catacterísticas:
+* Ubuntu 15.10
 * Java 8
+
+Estamos usando `docker-compose` para describir algunas dependencias de imágenes:
+  * MongoDB
+  * Mysql
+  * Redis
+
+Cada una de esas imágenes corre en un contenedor distinto que la app y se comunican por red.
+Lo que falta de configurar es pasar las variables de entorno  de nuestra app para configurar la base de datos a utilizar.
+
+Lo que no sabemos bien es si es mejor tener un contenedor por servicio o todos los servicios en el mismo contenedor/imagen.
+
+
+

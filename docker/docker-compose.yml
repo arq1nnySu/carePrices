@@ -1,0 +1,7 @@
+version: '2'
+
+services:
+  careprices:
+    build: .
+    ports:
+      - "9200:9200"
