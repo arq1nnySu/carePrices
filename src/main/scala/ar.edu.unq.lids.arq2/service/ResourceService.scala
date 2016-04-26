@@ -26,7 +26,7 @@ class ResourceService[T<:Resource, D<:DTO[T]](implicit manifestT: Manifest[T], m
     repository.get(ff, value)
   }
 
-  def filter(filters:List[((T)=>Serializable, Option[Serializable])]):List[Dto] = transactional{
+  def filter(filters:List[((T)=>String, Option[String])]):List[Dto] = transactional{
     repository.filter(filters)
   }
 

@@ -20,11 +20,11 @@ class Repository[T<:Resource](implicit m: Manifest[T]) {
       }.head
   }
 
-  def filter(filters:List[((T)=>Serializable, Option[Serializable])]): List[T] = {
+  def filter(filters:List[((T)=>String, Option[String])]): List[T] = {
     select[T] where( t => filter(t, filters) )
   }
 
-  protected def filter(t:T, filters:List[((T)=>Serializable, Option[Serializable])])={
+  protected def filter(t:T, filters:List[((T)=>String, Option[String])])={
     val criterias = filters.collect{ case (property, Some(value)) => property(t) :== value}
     criterias.reduce[Criteria]((c1, c2) => (c1 :&& c2).asInstanceOf[Criteria])
   }

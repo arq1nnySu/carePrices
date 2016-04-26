@@ -26,7 +26,7 @@ object CartePriceActivateContext extends ActivateContext {
 		val jdbcDriver = "com.mysql.jdbc.Driver"
 		val user = configuration.database.mysql.user
 		val password = configuration.database.mysql.password
-		val url = configuration.database.mysql.url
+		val url = configuration.database.mysql.url+configuration.database.mysql.schema
 		val dialect = mySqlDialect
 	}
 

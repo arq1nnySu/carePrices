@@ -34,7 +34,8 @@ package object configuration {
     object mysql{
       val user = Properties.envOrSome("mysql_user", Some("root"))
       val password = Properties.envOrSome("mysql_pwd", Some("root"))
-      val url = Properties.envOrElse("mysql_url", "jdbc:mysql://localhost:8889/activate_test")
+      val schema = Properties.envOrElse("mysql_schema", "careprices")
+      val url = Properties.envOrElse("mysql_url", "jdbc:mysql://localhost:8889/")
     }
 
     object redis{

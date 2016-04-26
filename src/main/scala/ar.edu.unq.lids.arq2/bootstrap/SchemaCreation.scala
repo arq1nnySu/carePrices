@@ -11,17 +11,19 @@ class SchemaCreation extends Migration{
     table[Product]
       .createTable(
         _.column[String]("name"),
-        _.column[String]("barcode")
+        _.column[String]("barcode"),
+        _.column[Int]("score")
       )
       .ifNotExists
 
     table[Shop]
       .createTable(
-        _.column[Double]("latitude"),
-        _.column[Double]("longitude"),
+        _.column[String]("latitude"),
+        _.column[String]("longitude"),
         _.column[String]("name"),
         _.column[String]("address"),
-        _.column[String]("location")
+        _.column[String]("location"),
+        _.column[String]("chain")
       )
       .ifNotExists
 

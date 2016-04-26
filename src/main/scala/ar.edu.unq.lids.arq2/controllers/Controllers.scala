@@ -21,34 +21,29 @@ class ServerController extends Controller{
 @Singleton
 class ProductController extends ResourceController[Product, ProductDTO]{
   get("/products")(all)
-  post("/products")(save)
+  post("/products")(save("products"))
   get("/products/:id") (byId)
 }
 
 @Singleton
 class PriceController extends ResourceController[Price, PriceDTO]{
   override val service = new PriceService
-  val cacheService  =  new CacheService
 
   get("/found-prices"){ request: Request =>
     response.ok.json((cacheService.memorize("prices"){service.all}))
   }
 
-  post("/found-prices"){ price: PriceDTO =>
-    val id = service.savePrice(price).id
-    response.created.location(s"/found-prices/$id")
-  }
+  post("/found-prices")(save("found-prices"))
 }
 
 @Singleton
 class ShopController extends ResourceController[Shop, ShopDTO]{
   override val service = new ShopService
 
-  get("/shops"){ request: ShopDTO =>
+  get("/shops"){ request: ShopRequest =>
     response.ok.json(service.search(request))
   }
 
-  post("/shops")(save)
-  //post("/shops"){request: ShopTest =>
-  //  response.ok.json(request)}
+  post("/shops")(save("shops"))
+
 }

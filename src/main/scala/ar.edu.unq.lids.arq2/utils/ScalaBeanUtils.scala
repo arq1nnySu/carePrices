@@ -4,6 +4,7 @@ import java.beans.{BeanInfo, Introspector, PropertyDescriptor}
 import java.lang.reflect.Method
 import java.util.{Comparator, TreeMap}
 
+import ar.edu.unq.lids.arq2.service.Resource
 import org.apache.commons.beanutils.PropertyUtilsBean
 
 import scala.util.Try
@@ -33,7 +34,9 @@ object ScalaBeanUtils {
       case Some(descriptor) => {
         value match{
           case o:Option[Object] => descriptor.getWriteMethod.invoke(target, o.getOrElse(null))
+          case null => {}
           case x if descriptor.getPropertyType.isAssignableFrom(classOf[Option[_]]) => descriptor.getWriteMethod.invoke(target, Option(x))
+          case x:Resource => descriptor.getWriteMethod.invoke(target, x.id)
           case x => descriptor.getWriteMethod.invoke(target, x)
         }
       }

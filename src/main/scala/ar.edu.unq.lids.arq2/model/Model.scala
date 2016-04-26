@@ -9,14 +9,14 @@ import scala.beans.BeanInfo
 
 @BeanInfo
 class Shop extends Entity with Resource {
-  var latitude: Double = _
-  var longitude: Double = _
+  var latitude: String = _
+  var longitude: String = _
   var name: String = _ // Local
   var address: String = _
   var location: String = _ // Barrio
   var chain: String = _ // Cadena de supermercado a la que pertenece
 
-  def this(latitude: Double, longitude: Double, name: String, address: String, location: String){
+  def this(latitude: String, longitude: String, name: String, address: String, location: String){
     this()
     this.latitude = latitude
     this.longitude = longitude

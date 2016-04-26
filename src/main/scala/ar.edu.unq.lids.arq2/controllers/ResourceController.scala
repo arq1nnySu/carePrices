@@ -7,13 +7,15 @@ import com.twitter.finatra.http.Controller
 
 abstract class ResourceController[T <: Resource, D <:DTO[T]](implicit manifestT: Manifest[T], manifestD: Manifest[D]) extends Controller{
   val service = new ResourceService[T, D]{}
+  lazy val cacheService  =  new CacheService
 
   def all =  { request: Request =>
     response.ok.json(service.all)
   }
 
-  def save =  { dto: D =>
-    response.ok.json(service.save(dto))
+  def save(endpoint:String) =  { dto: D =>
+    val resource = service.save(dto)
+    response.created.location(s"/$endpoint/${resource.id.getOrElse("")}")
   }
 
   def byId =  { request: Request =>
