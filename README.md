@@ -65,19 +65,24 @@ package object configuration {
 
 
 ## Ejecución
-* Desde **IntelliJ**:\
+Por default la app levanta en el puerto `9200`.
+
+* Desde **IntelliJ**:
     Para la ejecución hay que ejecutar el object `Server`.
-* Desde la consola:\
-    Correr el comando  ```sbt assembly ``` que generra el archivo     `carePrices.jar`. Una vez generado se puede correr el jar ejecutando: `java -jar carePrices.jar`
+* Desde la consola:
+    Correr el comando `sbt run` y la app levanta.
+* Desde la consola generando un jar:
+    Correr el comando  ```sbt assembly ``` que generra el archivo  `carePrices.jar`. Una vez generado se puede correr el jar ejecutando: `java -jar carePrices.jar`
+
 
 
 
 
 #### Con la configuración por default
-Por default el servidor va a escuchar el puerto `8081`. \
+Por default el servidor va a escuchar el puerto `9200`.
 Para cambiar eso hay que setear la variable de entorno correspondiente o modificar el puerto por default:
 ```scala
-val port = ":" + Properties.envOrElse("PORT", "8081")
+val port = ":" + Properties.envOrElse("PORT", "9200")
 ```
 
 Para elegir que motor de base de datos se quiere usar hay que modificar la variable `storage`:
@@ -170,6 +175,12 @@ Cada una de esas imágenes corre en un contenedor distinto que la app y se comun
 Lo que falta de configurar es pasar las variables de entorno  de nuestra app para configurar la base de datos a utilizar.
 
 Lo que no sabemos bien es si es mejor tener un contenedor por servicio o todos los servicios en el mismo contenedor/imagen.
+
+
+#### Levantar la imágen Docker
+
+Lavantar la imágen tenemos un script `docker_run.sh` que compila las imágenes y las levanta.
+ Por ahora este script levanta todos los servicios extra que tenemos (`mysql`, `mongodb`, `redis`), pero la idea es poder configurarlo para que se levante solo si se quiere.
 
 
 

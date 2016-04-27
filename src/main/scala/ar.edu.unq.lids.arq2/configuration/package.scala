@@ -13,7 +13,7 @@ package object configuration {
   }
 
   object server{
-    val port = ":" + Properties.envOrElse("PORT", "8081")
+    val port = ":" + Properties.envOrElse("PORT", "9200")
   }
 
   object database{
