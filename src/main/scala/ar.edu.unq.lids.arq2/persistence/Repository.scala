@@ -25,7 +25,11 @@ class Repository[T<:Resource](implicit m: Manifest[T]) {
   }
 
   protected def filter(t:T, filters:List[((T)=>String, Option[String])])={
-    val criterias = filters.collect{ case (property, Some(value)) => property(t) :== value}
+    var criterias = filters.collect{ case (property, Some(value)) => property(t) :== value}
+    if(criterias.isEmpty) {
+      val c = (t.id :!= "1") //Esto es para tener un criteria por defautl, si no el reduce rompe
+      criterias = criterias.::(c)
+    }
     criterias.reduce[Criteria]((c1, c2) => (c1 :&& c2).asInstanceOf[Criteria])
   }
 

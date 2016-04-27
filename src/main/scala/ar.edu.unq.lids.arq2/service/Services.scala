@@ -25,7 +25,6 @@ class ShopService extends ResourceService[Shop, ShopDTO]{
 
   def search(request: ShopRequest) = {
     filter(List[((Shop)=>String, Option[String])](
-      (s=> "1", Some("1")),
       (_.location, request.location),
       (_.name, request.name),
       (_.address, request.address),
