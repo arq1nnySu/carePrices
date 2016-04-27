@@ -45,3 +45,6 @@ libraryDependencies ++= Seq(
   "log4j" % "log4j" % "1.2.17",
   "net.debasishg" %% "redisclient" % "3.0"
 )
+
+
+mainClass := Some("ar.edu.unq.lids.arq2.server.Server")
