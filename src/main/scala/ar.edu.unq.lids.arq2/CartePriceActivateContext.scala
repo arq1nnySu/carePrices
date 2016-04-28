@@ -15,7 +15,7 @@ object CartePriceActivateContext extends ActivateContext {
 
 	//val storage = new PrevaylerStorage
 
-	val mongoStorage = new AsyncMongoStorage {
+	lazy val mongoStorage = new AsyncMongoStorage {
 		val host = configuration.database.mongo.host
 		override val port = configuration.database.mongo.port
 		val db = configuration.database.mongo.db
