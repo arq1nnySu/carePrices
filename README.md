@@ -180,7 +180,13 @@ Lo que no sabemos bien es si es mejor tener un contenedor por servicio o todos l
 #### Levantar la imágen Docker
 
 Lavantar la imágen tenemos un script `docker_run.sh` que compila las imágenes y las levanta.
- Por ahora este script levanta todos los servicios extra que tenemos (`mysql`, `mongodb`, `redis`), pero la idea es poder configurarlo para que se levante solo si se quiere.
+Podemos configurar para que utilice la base de datos que querramos o si se quiere utilizar a redis como cache.
+Las formas son:
+
+  * `docker_run.sh -d mysql` o `docker_run.sh --database=mysql` - Con esto nuestra app utiliza **mysql** como base de datos.
+  * `docker_run.sh -d mongo` o `docker_run.sh --database=mongo` - Con esto nuestra app utiliza **mongodb** como base de datos.
+  * `docker_run.sh -c redis` o `docker_run.sh --cache=redis` - Con esto nuestra app utiliza **redis** como cache.
+  * Tambien podemos combinar **mysql** con **redis** p **mongo** con **redis**: `docker_run.sh -d mongo -c redis`.
 
 
 

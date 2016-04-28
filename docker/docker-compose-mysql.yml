@@ -4,6 +4,12 @@ services:
   careprices:
     depends_on:
       - mysql
+    environment:
+      - storage=mysql
+      - mysql_url=jdbc:mysql://mysql:3306/
+      - mysql_user=careprices
+      - mysql_pwd=careprices
+      - mysql_schema=careprices
   mysql:
     image: mysql
     ports:

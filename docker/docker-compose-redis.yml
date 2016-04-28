@@ -4,6 +4,8 @@ services:
   careprices:
     depends_on:
       - redis
+    environment:
+      - redis_host=redis
   redis:
       image: redis
       ports:
