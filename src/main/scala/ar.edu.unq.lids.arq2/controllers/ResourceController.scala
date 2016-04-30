@@ -9,8 +9,8 @@ abstract class ResourceController[T <: Resource, D <:DTO[T]](implicit manifestT:
   val service = new ResourceService[T, D]{}
   lazy val cacheService  =  new CacheService
 
-  def all =  { request: Request =>
-    response.ok.json(service.all)
+  def all =  { request: ListRequest =>
+    response.ok.json(service.all(request.limit, request.offset))
   }
 
   def save(endpoint:String) =  { dto: D =>
@@ -24,3 +24,7 @@ abstract class ResourceController[T <: Resource, D <:DTO[T]](implicit manifestT:
   }
 
 }
+
+
+case class ListResult[T](items:List[T], paging:Paging)
+case class Paging(limit:Int, offset:Int, total:Int)

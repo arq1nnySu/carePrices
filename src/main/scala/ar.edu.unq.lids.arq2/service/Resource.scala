@@ -64,6 +64,8 @@ case class ShopTest(
 //TODO Mergear el ShopRequest Con el ShopDTO
 // El problema son los options
 case class ShopRequest(
+  @QueryParam var limit: Option[Int]= None,
+  @QueryParam var offset: Option[Int]= None,
   @QueryParam var latitude: Option[String]= None,
   @QueryParam var longitude: Option[String]=None,
   @QueryParam var name: Option[String]=None,
@@ -79,5 +81,9 @@ class ShopDTO() extends DTO[Shop]{
   var location : String=_
   var id:Option[String] = _
 }
+
+
+case class ListRequest(@QueryParam var limit: Option[Int]= None, @QueryParam var offset: Option[Int]= None)
+
 
 

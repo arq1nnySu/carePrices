@@ -29,8 +29,8 @@ class ProductController extends ResourceController[Product, ProductDTO]{
 class PriceController extends ResourceController[Price, PriceDTO]{
   override val service = new PriceService
 
-  get("/found-prices"){ request: Request =>
-    response.ok.json((cacheService.memorize("prices"){service.all}))
+  get("/found-prices"){ request: ListRequest =>
+    response.ok.json((cacheService.memorize("prices"){service.all(request.limit, request.offset)}))
   }
 
   post("/found-prices")(save("found-prices"))
@@ -47,3 +47,5 @@ class ShopController extends ResourceController[Shop, ShopDTO]{
   post("/shops")(save("shops"))
 
 }
+
+

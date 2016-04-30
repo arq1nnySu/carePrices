@@ -1,9 +1,8 @@
 package ar.edu.unq.lids.arq2.service
 
-import java.io.Serializable
-
 import ar.edu.unq.lids.arq2.CartePriceActivateContext._
-import ar.edu.unq.lids.arq2.persistence.Repository
+import ar.edu.unq.lids.arq2.controllers.{ListResult, Paging}
+import ar.edu.unq.lids.arq2.persistence.{QueryResult, Repository}
 import net.fwbrasil.activate.statement.StatementSelectValue
 
 class ResourceService[T<:Resource, D<:DTO[T]](implicit manifestT: Manifest[T], manifestD: Manifest[D]){
@@ -18,16 +17,21 @@ class ResourceService[T<:Resource, D<:DTO[T]](implicit manifestT: Manifest[T], m
     repository.save(data)
   }
 
-  def all = transactional{
-    repository.alll.map(resourceToDTO(_))
+  def all(limit:Option[Int], offset:Option[Int]) = transactional{
+    paginateResult(repository.all(limit, offset))
+
   }
 
   def get(ff:(T)=>String, value:StatementSelectValue):Dto = transactional{
     repository.get(ff, value)
   }
 
-  def filter(filters:List[((T)=>String, Option[String])]):List[Dto] = transactional{
-    repository.filter(filters)
+  def filter(limit:Option[Int], offset:Option[Int], filters:List[((T)=>String, Option[String])]) = transactional{
+    paginateResult(repository.filter(filters, limit, offset))
+  }
+
+  def paginateResult(result:QueryResult[T]) = {
+    ListResult(result.items.map(resourceToDTO(_)), Paging(result.limit, result.offset, result.total))
   }
 
 }

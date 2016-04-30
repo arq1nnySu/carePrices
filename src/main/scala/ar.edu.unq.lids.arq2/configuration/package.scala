@@ -14,6 +14,7 @@ package object configuration {
 
   object server{
     val port = ":" + Properties.envOrElse("PORT", "9200")
+    val listPageSize = Properties.envOrElse("list_page_size", "10").toInt
   }
 
   object database{
