@@ -107,40 +107,53 @@ val fillData = Properties.envOrNone("fill_data").map(_=>false).getOrElse(true)
 #### MYSQL
 Si queremos que se utilice `mysql` debemos configurar:
 * `user` - Por default es root.
-    ```scala
-     val user = Properties.envOrSome("mysql_user", Some("root"))
+
+    ```scala 
+    val user = Properties.envOrSome("mysql_user", Some("root"))
     ``` 
+--       
 * `password` - Por default es root.
-    ```scala
-     val password = Properties.envOrSome("mysql_pwd", Some("root"))
-    ```
-* `schema` - Aca se configura el Schema.
-    ```scala
-     val schema = Properties.envOrElse("mysql_schema", "careprices")
-    ```
-* `url` - Aca se configura Host:
-    ```scala
-     val url = Properties.envOrElse("mysql_url", "jdbc:mysql://localhost:8889/")
-    ```
     
+    ```scala
+    val password = Properties.envOrSome("mysql_pwd", Some("root"))
+    ```
+--
+* `schema` - Aca se configura el Schema:
+
+    ```scala
+    val schema = Properties.envOrElse("mysql_schema", "careprices")
+    ```
+--
+* `url` - Aca se configura Host:
+   
+    ```scala
+    val url = Properties.envOrElse("mysql_url", "jdbc:mysql://localhost:8889/")
+    ```
 
 Las tablas las crea el software.
 
 ### MongoDB
 Si queremos utilizar mongo hay que configurar:
 * `host` - Por default es localhost.
+
     ```scala
      val host = Properties.envOrElse("mongo_host", "localhost")
     ```
+--    
 * `port` - Por default es 27017.
+
     ```scala
      val port = Properties.envOrElse("mongo_posts", "27017")
     ```
+--
 * `db` - Por default es careprices :
+    
     ```scala
      val db = Properties.envOrElse("mongo_db", "careprices")
     ```
+--
 * `authentication` - Por default es None:
+    
     ```scala
         val authentication = Properties.envOrNone("mongo_auth")
     ```
