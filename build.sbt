@@ -38,6 +38,7 @@ libraryDependencies ++= Seq(
   "net.fwbrasil" %% "activate-mongo-async" % versions.activateVersion,
   "net.fwbrasil" %% "activate-mongo" % versions.activateVersion,
   "com.newrelic.agent.java" % "newrelic-api" % versions.newrelic,
+  "com.newrelic.agent.java" % "newrelic-agent" % versions.newrelic,
   "com.google.code.gson" % "gson" % "2.6.2",
   "net.fwbrasil" %% "activate-jdbc" % versions.activateVersion,
   "commons-beanutils" % "commons-beanutils" % "1.9.2",
