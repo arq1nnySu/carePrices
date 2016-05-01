@@ -27,15 +27,15 @@ class Repository[T<:Resource](implicit m: Manifest[T]) {
 
     val baseQuery = (t:T) => Where(filter(t, filters)) select(t) orderBy(t.id)
 
-    val total = query {baseQuery}.size
-    val items = query {
+    val total = dynamicQuery {baseQuery}.size
+    val items = dynamicQuery {
       (t:T) => { baseQuery(t) limit(queryLimit) offset(queryOffset) }
     }
 
     QueryResult( items, queryLimit, queryOffset, total)
   }
 
-  protected def filter(t:T, filters:List[((T)=>String, Option[String])]):Option[Criteria] ={
+  def filter(t:T, filters:List[((T)=>String, Option[String])]):Option[Criteria] ={
     var criterias = filters.collect{ case (property, Some(value)) => property(t) :== value}
     if(criterias.isEmpty) {
       None

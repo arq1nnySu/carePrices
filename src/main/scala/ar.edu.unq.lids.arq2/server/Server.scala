@@ -16,12 +16,13 @@ object Server extends HttpServer {
 
   override val defaultFinatraHttpPort = configuration.server.port
 
-  override val disableAdminHttpServer = true
+  override val disableAdminHttpServer = false
 
   override def configureHttp(router: HttpRouter) {
     router
       .filter[LoggingMDCFilter[Request, Response]]
       .filter[TraceIdMDCFilter[Request, Response]]
+      .filter[NewRelicFilter]
       .filter[CommonFilters]
       .add[ProductController]
       .add[ShopController]

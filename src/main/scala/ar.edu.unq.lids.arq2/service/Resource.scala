@@ -6,7 +6,7 @@ import ar.edu.unq.lids.arq2.CartePriceActivateContext._
 import ar.edu.unq.lids.arq2.model.{Price, Product, Shop}
 import ar.edu.unq.lids.arq2.utils.ScalaBeanUtils
 import com.fasterxml.jackson.annotation.JsonProperty
-import com.newrelic.agent.deps.com.google.gson.Gson
+import com.google.gson.Gson
 import com.twitter.finatra.json.internal.caseclass.validation.validators.NotEmptyInternal
 import com.twitter.finatra.request.QueryParam
 

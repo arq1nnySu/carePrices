@@ -21,7 +21,7 @@ lazy val versions = new {
   val guice = "4.0"
   val logback = "1.0.13"
   val finagleMetrics = "0.0.2"
-  val newrelic = "3.26.1"
+  val newrelic = "3.28.0"
   val activateVersion = "1.7"
 }
 
@@ -34,10 +34,11 @@ libraryDependencies ++= Seq(
   "com.twitter.finatra" %% "finatra-slf4j" % versions.finatra,
   "com.twitter.finatra" %% "finatra-jackson"  % versions.finatra,
   "com.github.rlazoti" %% "finagle-metrics" % versions.finagleMetrics,
-  "com.newrelic.agent.java" % "newrelic-agent" % versions.newrelic,
   "net.fwbrasil" %% "activate-core" % versions.activateVersion,
   "net.fwbrasil" %% "activate-mongo-async" % versions.activateVersion,
   "net.fwbrasil" %% "activate-mongo" % versions.activateVersion,
+  "com.newrelic.agent.java" % "newrelic-api" % versions.newrelic,
+  "com.google.code.gson" % "gson" % "2.6.2",
   "net.fwbrasil" %% "activate-jdbc" % versions.activateVersion,
   "commons-beanutils" % "commons-beanutils" % "1.9.2",
   "mysql" % "mysql-connector-java" % "5.1.16",
