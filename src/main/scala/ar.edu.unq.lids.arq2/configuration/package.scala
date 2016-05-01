@@ -13,7 +13,12 @@ package object configuration {
 
   object server{
     val port = ":" + Properties.envOrElse("PORT", "9200")
-    val listPageSize = Properties.envOrElse("list_page_size", "10").toInt
+
+  }
+
+  object response{
+    val limitSize = Properties.envOrElse("limit_size", "10").toInt
+    val maxLimitSize = Properties.envOrElse("max_limit_size", "1000").toInt
   }
 
   object database{

@@ -1,8 +1,10 @@
 # Mirar para cuidar
 
-## Instancias
+## Instancia
 * [Heroku](http://careprices.herokuapp.com) - Servidor hosteado en Heroku.
-* [Docker](https://hub.docker.com/r/nnysu/careprices) - Docker Image
+
+## Monitoreo
+* [NewRelic](https://rpm.newrelic.com/accounts/1280223/applications)
 
 ## Documentación de la API:
 * [API](http://docs.careprices.apiary.io/#reference/0/product/create-a-new-product?console=1)
@@ -37,6 +39,10 @@ package object configuration {
   }
   object server{
     val port
+  }
+  object response{
+    val limitSize
+    val maxLimitSize
   }
   object database{
     val storage
@@ -203,4 +209,22 @@ Las formas son:
   * `docker_run.sh -d mongo` o `docker_run.sh --database=mongo` - Con esto nuestra app utiliza **mongodb** como base de datos.
   * `docker_run.sh -c redis` o `docker_run.sh --cache=redis` - Con esto nuestra app utiliza **redis** como cache.
   * Tambien podemos combinar **mysql** con **redis** p **mongo** con **redis**: `docker_run.sh -d mongo -c redis`.
+  
+  
+  
+### Monitoreo 
+
+Tenemos integrado **newrelic** en la imagen de docker, para monitorear el server y en la app.
+La información del server se encuentra en la sección **Servers** de **newrelic**.
+La información de la aplicación se encuentra en la sección **APM** de **newrelic** con el nombre de  `Careprice (Developmnent)`.
+
+Para el monitoreo de la aplicación tenemos dos integraciones:
+
+* El primero esta integrado al server container, que monotorea todo el estado de la app. Pero esta integración no es completa, 
+    muestra todas las transacciones en una, bajo el nombre de **/NettyDispatcher** (aparentemente es una limitación del framework elegido).
+
+* El segundo es utilizando la api de **newrelic** creamos un `filtro` para tracear todos los request y responses que realiza nuestra app.
+ 
+Como contenido extra, tenemos mas info de el estado del servidor con una herramienta que de **Finagle** que esta levantada en el puerto `9990`.  
+
 
