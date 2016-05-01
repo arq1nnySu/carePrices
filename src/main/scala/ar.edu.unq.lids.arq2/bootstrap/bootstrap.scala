@@ -32,10 +32,11 @@ object bootstrap  {
     new Product("Galletitas Don Satur", "456565")
 
     val shop1 = new Shop("", "", "Chino de casa", "shangay", "Bernal")
-    val shop2= new Shop("0", "", "Verduleria 2 personas y un boliviano", "Av. Siempre viva", "Cronica")
+    val shop2 = new Shop("0", "", "Verduleria 2 personas y un boliviano", "Av. Siempre viva", "Cronica")
 
-    new Price(shop1, p1, 20, "")
-    new Price(shop2, p1, 25, "")
-    new Price(shop1, p2, 10, "")
+    new Price(shop1, p1.barcode, 20, "")
+    new Price(shop2, p2.barcode, 25, "")
+    new Price(shop2, p1.barcode, 10, "")
+    new Price(shop1, p2.barcode, 20, "")
   }
 }
