@@ -3,7 +3,7 @@ common: &default_settings
   license_key: '4e1752d76b896584b362b30d4c8acf1f75a9bbb7'
 
   agent_enabled: true
-  app_name: careprice_docker
+  app_name: Careprice (Developmnent)
   high_security: false
 
   enable_auto_app_naming: false
