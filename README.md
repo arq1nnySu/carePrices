@@ -137,25 +137,25 @@ Si queremos utilizar mongo hay que configurar:
 * `host` - Por default es localhost.
 
     ```scala
-     val host = Properties.envOrElse("mongo_host", "localhost")
+    val host = Properties.envOrElse("mongo_host", "localhost")
     ```
 --    
 * `port` - Por default es 27017.
 
     ```scala
-     val port = Properties.envOrElse("mongo_posts", "27017")
+    val port = Properties.envOrElse("mongo_posts", "27017")
     ```
 --
 * `db` - Por default es careprices :
     
     ```scala
-     val db = Properties.envOrElse("mongo_db", "careprices")
+    val db = Properties.envOrElse("mongo_db", "careprices")
     ```
 --
 * `authentication` - Por default es None:
     
     ```scala
-        val authentication = Properties.envOrNone("mongo_auth")
+    val authentication = Properties.envOrNone("mongo_auth")
     ```
 
 ### Redis
