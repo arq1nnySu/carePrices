@@ -2,7 +2,6 @@
 
 ## Instancias
 * [Heroku](http://careprices.herokuapp.com) - Servidor hosteado en Heroku.
-* [Amazon](http://careprices.boletius.com) - Servidor hosteado en Amazon.
 * [Docker](https://hub.docker.com/r/nnysu/careprices) - Docker Image
 
 ## Documentación de la API:
@@ -32,7 +31,6 @@ El objeto es:
 package object configuration {
   object environment {
     val development
-    val amazon
     val heroku
 
     val name
@@ -109,24 +107,29 @@ val fillData = Properties.envOrNone("fill_data").map(_=>false).getOrElse(true)
 #### MYSQL
 Si queremos que se utilice `mysql` debemos configurar:
 * `user` - Por default es root.
-     ```scala
+    ```scala
      val user = Properties.envOrSome("mysql_user", Some("root"))
-    ```
+    ``` 
 * `password` - Por default es root.
     ```scala
      val password = Properties.envOrSome("mysql_pwd", Some("root"))
     ```
-* `url` - Aca se configura host y schema :
-     ```scala
-     val url = Properties.envOrElse("mysql_url", "jdbc:mysql://localhost:8889/activate_test")
+* `schema` - Aca se configura el Schema.
+    ```scala
+     val schema = Properties.envOrElse("mysql_schema", "careprices")
     ```
+* `url` - Aca se configura Host:
+    ```scala
+     val url = Properties.envOrElse("mysql_url", "jdbc:mysql://localhost:8889/")
+    ```
+    
 
 Las tablas las crea el software.
 
 ### MongoDB
 Si queremos utilizar mongo hay que configurar:
 * `host` - Por default es localhost.
-     ```scala
+    ```scala
      val host = Properties.envOrElse("mongo_host", "localhost")
     ```
 * `port` - Por default es 27017.
@@ -134,11 +137,11 @@ Si queremos utilizar mongo hay que configurar:
      val port = Properties.envOrElse("mongo_posts", "27017")
     ```
 * `db` - Por default es careprices :
-     ```scala
+    ```scala
      val db = Properties.envOrElse("mongo_db", "careprices")
     ```
-* `authentication` - Por default es None  :
-     ```scala
+* `authentication` - Por default es None:
+    ```scala
         val authentication = Properties.envOrNone("mongo_auth")
     ```
 
@@ -151,7 +154,7 @@ Es decir si no tenemos un servicio de Redis la aplicación sigue funcionando.
 Para utilizar Redis necesitamos configurar:
 
 * `host` - Por default es localhost.
-     ```scala
+    ```scala
      val host = Properties.envOrElse("redis_host", "localhost")
     ```
 * `port` - Por default es 6379.
@@ -187,6 +190,4 @@ Las formas son:
   * `docker_run.sh -d mongo` o `docker_run.sh --database=mongo` - Con esto nuestra app utiliza **mongodb** como base de datos.
   * `docker_run.sh -c redis` o `docker_run.sh --cache=redis` - Con esto nuestra app utiliza **redis** como cache.
   * Tambien podemos combinar **mysql** con **redis** p **mongo** con **redis**: `docker_run.sh -d mongo -c redis`.
-
-
 
