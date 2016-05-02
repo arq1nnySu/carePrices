@@ -32,7 +32,7 @@ class ShopService extends ResourceService[Shop, ShopDTO] {
   }
 
   override def save(shopdto: ShopDTO): ShopDTO = transactional {
-    val shop = select[Shop].where(shop => (shop.latitude :== shopdto.latitude) :|| (shop.longitude :== shopdto.longitude) :|| (shop.name :== shopdto.name) :|| (shop.address :== shopdto.address) :|| (shop.location :== shopdto.location))
-    if (shop.isEmpty) repository.save(shopdto) else shop.head
+    val shop_rep = select[Shop].where(shop => ((shop.address :== shopdto.address) :&& (shop.location :== shopdto.location)) :|| ((shop.latitude :== shopdto.latitude) :&& (shop.longitude :== shopdto.longitude)))
+    if (shop_rep.isEmpty) repository.save(shopdto) else shop_rep.head
   }
 }
