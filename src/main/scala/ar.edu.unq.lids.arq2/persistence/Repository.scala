@@ -22,7 +22,7 @@ class Repository[T<:Resource](implicit m: Manifest[T]) {
   }
 
   def filter(filters:List[((T)=>String, Option[String])], limit:Option[Int]=None, offset:Option[Int]=None):QueryResult[T] = {
-    val queryLimit = limit.getOrElse(configuration.response.limitSize).max(configuration.response.maxLimitSize)
+    val queryLimit = limit.getOrElse(configuration.response.limitSize).min(configuration.response.maxLimitSize)
     val queryOffset = offset.getOrElse(0)
 
     val baseQuery = (t:T) => Where(filter(t, filters)) select(t) orderBy(t.id)
