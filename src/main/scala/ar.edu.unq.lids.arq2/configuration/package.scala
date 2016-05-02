@@ -6,7 +6,6 @@ package object configuration {
 
   object environment {
     val development = "DEVELOPMENT"
-    val amazon = "AMAZON"
     val heroku = "HEROKU"
 
     val name = ":" + Properties.envOrElse("environment", development)
@@ -49,5 +48,4 @@ package object configuration {
       val port = Properties.envOrElse("redis_port", "6379").toInt
     }
   }
-
 }

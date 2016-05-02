@@ -42,11 +42,11 @@ class Product extends Entity with Resource {
 @BeanInfo
 class Price extends Entity with Resource {
   var shop: Shop = _
-  var product: Product = _
+  var product: String = _
   var price: Double = _
   var datetime: String = _
 
-  def this(shop: Shop, product: Product, price: Double, datetime: String) {
+  def this(shop: Shop, product: String, price: Double, datetime: String) {
     this()
     this.shop = shop
     this.product = product

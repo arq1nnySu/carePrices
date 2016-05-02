@@ -55,11 +55,13 @@ class PriceDTO extends DTO[Price]{
   var id:Option[String] = _
 }
 
+/*TODO Pensar cuales atributos tiene que tener validacion
 case class ShopTest(
-  @NotEmptyInternal name: String,
-  @NotEmptyInternal address: String,
-  @NotEmptyInternal location: String
+  @NotEmptyInternal name: string,
+  @NotEmptyInternal address: string,
+  @NotEmptyInternal location: string
   )
+*/
 
 //TODO Mergear el ShopRequest Con el ShopDTO
 // El problema son los options
@@ -73,7 +75,7 @@ case class ShopRequest(
   @QueryParam var location : Option[String]=None
 )
 
-class ShopDTO() extends DTO[Shop]{
+class ShopDTO() extends DTO[Shop] {
   var latitude: String =_
   var longitude: String =_
   var name:String =_
@@ -82,8 +84,4 @@ class ShopDTO() extends DTO[Shop]{
   var id:Option[String] = _
 }
 
-
 case class ListRequest(@QueryParam var limit: Option[Int]= None, @QueryParam var offset: Option[Int]= None)
-
-
-
