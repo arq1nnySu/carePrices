@@ -14,7 +14,7 @@ class Repository[T<:Resource](implicit m: Manifest[T]) {
   def all(limit:Option[Int]=None, offset:Option[Int]=None) = filter(List(), limit, offset)
 
   def get(ff:(T)=>String, value:StatementSelectValue): T = {
-      query {
+    dynamicQuery {
         (t: T) => {
           where(ff(t) :== value) select (t)
         }
