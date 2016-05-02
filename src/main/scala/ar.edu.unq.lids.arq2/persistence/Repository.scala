@@ -21,22 +21,30 @@ class Repository[T<:Resource](implicit m: Manifest[T]) {
       }.head
   }
 
+  def filter(restriction: Restriction[T])  ={
+    dynamicQuery {
+      (t: T) => {
+        Where(restriction.build(t)) select (t)
+      }
+    }
+  }
+
   def filter(filters:List[((T)=>String, Option[String])], limit:Option[Int]=None, offset:Option[Int]=None):QueryResult[T] = {
     val queryLimit = limit.getOrElse(configuration.response.limitSize).min(configuration.response.maxLimitSize)
     val queryOffset = offset.getOrElse(0)
 
-    val baseQuery = (t:T) => Where(filter(t, filters)) select(t) orderBy(t.id)
+    val commonWhere = (t:T) => Where(filter(t, filters))
 
-    val total = dynamicQuery {baseQuery}.size
+    val total = dynamicQuery {(t:T) => commonWhere(t) select(1) orderBy(t.id)}.size
     val items = dynamicQuery {
-      (t:T) => { baseQuery(t) limit(queryLimit) offset(queryOffset) }
+      (t:T) => { commonWhere(t) select(t) orderBy(t.id) limit(queryLimit) offset(queryOffset) }
     }
 
     QueryResult( items, queryLimit, queryOffset, total)
   }
 
   def filter(t:T, filters:List[((T)=>String, Option[String])]):Option[Criteria] ={
-    var criterias = filters.collect{ case (property, Some(value)) => property(t) :== value}
+    val criterias = filters.collect{ case (property, Some(value)) => property(t) :== value}
     if(criterias.isEmpty) {
       None
     }else {
@@ -45,19 +53,6 @@ class Repository[T<:Resource](implicit m: Manifest[T]) {
   }
 
 }
-
-
-trait FilterOperator{
-  def apply(c1:Criteria, c2:Criteria):BooleanOperatorCriteria
-}
-
-object AndOperator extends FilterOperator{
-  def apply(c1:Criteria, c2:Criteria) = c1 :&& c2
-}
-object OrOperator extends  FilterOperator{
-  def apply(c1:Criteria, c2:Criteria) = c1 :|| c2
-}
-
 
 
 case class QueryResult[T](items:List[T], limit:Int, offset:Int, total:Int)

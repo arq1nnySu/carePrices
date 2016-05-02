@@ -1,9 +1,12 @@
 package ar.edu.unq.lids.arq2.controllers
 
 import ar.edu.unq.lids.arq2.CartePriceActivateContext._
+import ar.edu.unq.lids.arq2.exceptions.DuplicateResourceException
 import ar.edu.unq.lids.arq2.service._
 import com.twitter.finagle.http.Request
 import com.twitter.finatra.http.Controller
+
+import scala.util.{Failure, Success, Try}
 
 abstract class ResourceController[T <: Resource, D <:DTO[T]](implicit manifestT: Manifest[T], manifestD: Manifest[D]) extends Controller{
   val service = new ResourceService[T, D]{}
@@ -14,8 +17,11 @@ abstract class ResourceController[T <: Resource, D <:DTO[T]](implicit manifestT:
   }
 
   def save(endpoint:String) =  { dto: D =>
-    val resource = service.save(dto)
-    response.created.location(s"/$endpoint/${resource.id.getOrElse("")}")
+    Try(service.save(dto)) match {
+      case Success(resource) => response.created.location(s"/$endpoint/${resource.id.getOrElse("")}")
+      case Failure(DuplicateResourceException(resource)) => response.conflict.location(s"/$endpoint/${resource.id}")
+    }
+
   }
 
   def byId =  { request: Request =>

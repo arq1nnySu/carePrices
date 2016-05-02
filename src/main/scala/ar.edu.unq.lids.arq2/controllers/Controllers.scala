@@ -34,6 +34,7 @@ class PriceController extends ResourceController[Price, PriceDTO]{
   }
 
   post("/found-prices")(save("found-prices"))
+  post("/found-prices/:id")(byId)
 }
 
 @Singleton
@@ -43,6 +44,8 @@ class ShopController extends ResourceController[Shop, ShopDTO]{
   get("/shops"){ request: ShopRequest =>
     response.ok.json(service.search(request))
   }
+
+  get("/shops/:id")(byId)
 
   post("/shops")(save("shops"))
 
