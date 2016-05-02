@@ -3,7 +3,7 @@ FROM beevelop/java
 ENV PORT 9200
 ENV log_key 52dfdbf5-a0b6-42af-9153-104f21bfa394
 ENV NEW_RELIC_LICENSE_KEY 4e1752d76b896584b362b30d4c8acf1f75a9bbb7
-ENV NEW_RELIC_APP_NAME careprices_docker
+ENV NEW_RELIC_APP_NAME Careprice (Developmnent)
 
 #NewRelic configuration
 RUN echo 'deb http://apt.newrelic.com/debian/ newrelic non-free' |  tee /etc/apt/sources.list.d/newrelic.list

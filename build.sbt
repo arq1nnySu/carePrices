@@ -43,8 +43,6 @@ libraryDependencies ++= Seq(
   "net.fwbrasil" %% "activate-jdbc" % versions.activateVersion,
   "commons-beanutils" % "commons-beanutils" % "1.9.2",
   "mysql" % "mysql-connector-java" % "5.1.16",
-  "com.logentries" % "logentries-appender" % "1.1.32",
-  "log4j" % "log4j" % "1.2.17",
   "net.debasishg" %% "redisclient" % "3.0"
 )
 
