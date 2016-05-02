@@ -214,8 +214,8 @@ Las formas son:
   
 ### Monitoreo 
 
-Tenemos integrado **newrelic** en la imagen de docker, para monitorear el server y en la app.
-La información del server se encuentra en la sección **Servers** de **newrelic**.
+Tenemos integrado **newrelic** en la imagen de docker, para monitorear el server y en la app.\
+La información del server se encuentra en la sección **Servers** de **newrelic**.\
 La información de la aplicación se encuentra en la sección **APM** de **newrelic** con el nombre de  `Careprice (Developmnent)`.
 
 Para el monitoreo de la aplicación tenemos dos integraciones:
@@ -228,3 +228,8 @@ Para el monitoreo de la aplicación tenemos dos integraciones:
 Como contenido extra, tenemos mas info de el estado del servidor con una herramienta que de **Finagle** que esta levantada en el puerto `9990`.  
 
 
+
+### Test de carga.
+Tenemos un plan de **JMeter** (en desarrollo) para poder medir el límite junto con los tiempos de respuesta y hacer 
+una comparación de del rendimiento utilizando las distintas bases de datos e incluyendo o no la caché.\
+  El archivo esta en `jmeter/stressTest.jmx`
