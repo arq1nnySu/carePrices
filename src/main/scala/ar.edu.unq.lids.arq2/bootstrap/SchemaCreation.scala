@@ -2,7 +2,7 @@ package ar.edu.unq.lids.arq2.bootstrap
 
 import ar.edu.unq.lids.arq2.model.{Price, Shop, Product}
 import net.fwbrasil.activate.migration.Migration
-import ar.edu.unq.lids.arq2.CartePriceActivateContext._
+import ar.edu.unq.lids.arq2.CarePriceActivateContext._
 
 class SchemaCreation extends Migration{
   def timestamp = 201604111510l

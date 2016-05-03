@@ -7,7 +7,7 @@ import ar.edu.unq.lids.arq2.service._
 import com.twitter.finagle.http.{Status, Request}
 import com.twitter.finatra.http.Controller
 import net.fwbrasil.activate.statement.StatementSelectValue
-import ar.edu.unq.lids.arq2.CartePriceActivateContext._
+import ar.edu.unq.lids.arq2.CarePriceActivateContext._
 
 @Singleton
 class ServerController extends Controller{

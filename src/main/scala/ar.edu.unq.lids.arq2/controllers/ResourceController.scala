@@ -1,6 +1,6 @@
 package ar.edu.unq.lids.arq2.controllers
 
-import ar.edu.unq.lids.arq2.CartePriceActivateContext._
+import ar.edu.unq.lids.arq2.CarePriceActivateContext._
 import ar.edu.unq.lids.arq2.exceptions.DuplicateResourceException
 import ar.edu.unq.lids.arq2.service._
 import com.twitter.finagle.http.Request

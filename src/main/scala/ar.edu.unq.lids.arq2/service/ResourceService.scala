@@ -1,6 +1,6 @@
 package ar.edu.unq.lids.arq2.service
 
-import ar.edu.unq.lids.arq2.CartePriceActivateContext._
+import ar.edu.unq.lids.arq2.CarePriceActivateContext._
 import ar.edu.unq.lids.arq2.controllers.{ListResult, Paging}
 import ar.edu.unq.lids.arq2.persistence.{QueryResult, Repository}
 import net.fwbrasil.activate.statement.StatementSelectValue

@@ -1,6 +1,6 @@
 package ar.edu.unq.lids.arq2.server
 
-import ar.edu.unq.lids.arq2.CartePriceActivateContext._
+import ar.edu.unq.lids.arq2.CarePriceActivateContext._
 import ar.edu.unq.lids.arq2._
 import ar.edu.unq.lids.arq2.controllers._
 import com.twitter.finagle.http.{Request, Response}
