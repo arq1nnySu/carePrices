@@ -12,8 +12,11 @@ abstract class ResourceController[T <: Resource, D <:DTO[T]](implicit manifestT:
   val service = new ResourceService[T, D]{}
   lazy val cacheService  =  new CacheService
 
+  def cache(request:Any) = cacheService.memorize(request.toString)_
+
   def all =  { request: ListRequest =>
-    response.ok.json(service.all(request.limit, request.offset))
+    val result = cache(request){service.all(request.limit, request.offset)}
+    response.ok.json(result)
   }
 
   def save(endpoint:String) =  { dto: D =>
