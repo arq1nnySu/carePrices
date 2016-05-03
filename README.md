@@ -233,3 +233,8 @@ Como contenido extra, tenemos mas info de el estado del servidor con una herrami
 Tenemos un plan de **JMeter** (en desarrollo) para poder medir el límite junto con los tiempos de respuesta y hacer 
 una comparación de del rendimiento utilizando las distintas bases de datos e incluyendo o no la caché.<br/>
   El archivo esta en `jmeter/stressTest.jmx`
+
+
+### Logging
+
+Loggeamos a logentries.
