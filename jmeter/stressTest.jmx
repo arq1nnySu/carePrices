@@ -9,12 +9,12 @@
         <collectionProp name="Arguments.arguments">
           <elementProp name="NUMBER_USERS" elementType="Argument">
             <stringProp name="Argument.name">NUMBER_USERS</stringProp>
-            <stringProp name="Argument.value">4000</stringProp>
+            <stringProp name="Argument.value">1</stringProp>
             <stringProp name="Argument.metadata">=</stringProp>
           </elementProp>
           <elementProp name="USERS_RAMPUP" elementType="Argument">
             <stringProp name="Argument.name">USERS_RAMPUP</stringProp>
-            <stringProp name="Argument.value">60</stringProp>
+            <stringProp name="Argument.value">2</stringProp>
             <stringProp name="Argument.metadata">=</stringProp>
           </elementProp>
           <elementProp name="WEBAPP_HOST" elementType="Argument">
@@ -86,7 +86,7 @@
           <stringProp name="RandomTimer.range">1</stringProp>
         </UniformRandomTimer>
         <hashTree/>
-        <GenericController guiclass="LogicControllerGui" testclass="GenericController" testname="Compra" enabled="true"/>
+        <GenericController guiclass="LogicControllerGui" testclass="GenericController" testname="Precios" enabled="true"/>
         <hashTree>
           <RandomVariableConfig guiclass="TestBeanGUI" testclass="RandomVariableConfig" testname="username" enabled="true">
             <stringProp name="maximumValue">100</stringProp>
@@ -125,7 +125,7 @@
               <stringProp name="HTTPSampler.response_timeout"></stringProp>
               <stringProp name="HTTPSampler.protocol"></stringProp>
               <stringProp name="HTTPSampler.contentEncoding"></stringProp>
-              <stringProp name="HTTPSampler.path">/shops</stringProp>
+              <stringProp name="HTTPSampler.path">/shops?limit=1</stringProp>
               <stringProp name="HTTPSampler.method">GET</stringProp>
               <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
               <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
@@ -167,7 +167,7 @@ vars.put(&quot;shopId&quot;, shops.items[0].id);
                     <boolProp name="HTTPArgument.always_encode">false</boolProp>
                     <stringProp name="Argument.value">{ &quot;shop_id&quot;: &quot;${shopId}&quot;,&#xd;
   &quot;product_id&quot;: &quot;8979879&quot;,&#xd;
-  &quot;price&quot;: 10,&#xd;
+  &quot;price&quot;: ${price},&#xd;
   &quot;datetime&quot;: &quot;234234&quot;&#xd;
 }</stringProp>
                     <stringProp name="Argument.metadata">=</stringProp>
