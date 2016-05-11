@@ -2,7 +2,7 @@ package ar.edu.unq.lids.arq2.model
 
 import java.lang.Double
 
-import ar.edu.unq.lids.arq2.CartePriceActivateContext._
+import ar.edu.unq.lids.arq2.CarePriceActivateContext._
 import ar.edu.unq.lids.arq2.service.Resource
 
 import scala.beans.BeanInfo

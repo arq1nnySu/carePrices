@@ -25,6 +25,14 @@ lazy val versions = new {
   val activateVersion = "1.7"
 }
 
+lazy val careprices = (project in file(".")).
+  enablePlugins(BuildInfoPlugin).
+  settings(
+    buildInfoKeys := Seq[BuildInfoKey](name, version, scalaVersion, sbtVersion),
+    buildInfoPackage := "ar.edu.unq.lids.arq2",
+    buildInfoOptions += BuildInfoOption.ToJson
+  )
+
 libraryDependencies ++= Seq(
   "org.scala-lang" % "scala-compiler" % "2.11.8",
   "org.scala-lang.modules" %% "scala-xml" % "1.0.5",
@@ -32,7 +40,7 @@ libraryDependencies ++= Seq(
   "com.twitter.finatra" %% "finatra-http" % versions.finatra,
   "com.twitter.finatra" %% "finatra-httpclient" % versions.finatra,
   "com.twitter.finatra" %% "finatra-slf4j" % versions.finatra,
-  "com.twitter.finatra" %% "finatra-jackson"  % versions.finatra,
+  "com.twitter.finatra" %% "finatra-jackson" % versions.finatra,
   "com.github.rlazoti" %% "finagle-metrics" % versions.finagleMetrics,
   "net.fwbrasil" %% "activate-core" % versions.activateVersion,
   "net.fwbrasil" %% "activate-mongo-async" % versions.activateVersion,
@@ -52,3 +60,4 @@ libraryDependencies ++= Seq(
 
 
 mainClass := Some("ar.edu.unq.lids.arq2.server.Server")
+

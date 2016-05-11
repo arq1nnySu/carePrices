@@ -2,19 +2,22 @@ package ar.edu.unq.lids.arq2.controllers
 
 import java.io.Serializable
 import javax.inject.Singleton
+import ar.edu.unq.lids.arq2.BuildInfo
 import ar.edu.unq.lids.arq2.model.{Product, Shop, Price}
 import ar.edu.unq.lids.arq2.service._
 import com.twitter.finagle.http.{Status, Request}
 import com.twitter.finatra.http.Controller
 import net.fwbrasil.activate.statement.StatementSelectValue
-import ar.edu.unq.lids.arq2.CartePriceActivateContext._
+import ar.edu.unq.lids.arq2.CarePriceActivateContext._
 
 @Singleton
 class ServerController extends Controller{
   get("/health") {request: Request =>
     response.ok.status = Status.Ok
-    response
+  }
 
+  get("/info") {request: Request =>
+    response.ok.json(BuildInfo.toJson)
   }
 }
 

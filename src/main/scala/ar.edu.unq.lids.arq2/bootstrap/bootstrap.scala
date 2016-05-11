@@ -3,7 +3,7 @@ import ar.edu.unq.lids.arq2.model.{Price, Shop, Product}
 import info.folone.scala.poi._
 
 //import com.twitter.finatra.http.HttpServer
-import ar.edu.unq.lids.arq2.CartePriceActivateContext._
+import ar.edu.unq.lids.arq2.CarePriceActivateContext._
 
 object bootstrap  extends App{
 

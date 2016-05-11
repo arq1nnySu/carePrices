@@ -1,6 +1,6 @@
 package ar.edu.unq.lids.arq2.persistence
 
-import ar.edu.unq.lids.arq2.CartePriceActivateContext._
+import ar.edu.unq.lids.arq2.CarePriceActivateContext._
 import ar.edu.unq.lids.arq2.configuration
 import ar.edu.unq.lids.arq2.controllers.{Paging, ListResult}
 import ar.edu.unq.lids.arq2.service.Resource

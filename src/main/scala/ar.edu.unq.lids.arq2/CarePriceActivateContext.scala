@@ -9,7 +9,7 @@ import net.fwbrasil.activate.storage.relational.idiom.mySqlDialect
 import scala.util.Properties
 
 // Initially, must be created the persistence context. It must be a singleton, so it makes sense to declare as "object".
-object CartePriceActivateContext extends ActivateContext {
+object CarePriceActivateContext extends ActivateContext {
 
 
 

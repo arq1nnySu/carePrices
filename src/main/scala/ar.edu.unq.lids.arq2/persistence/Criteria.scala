@@ -3,7 +3,7 @@ package ar.edu.unq.lids.arq2.persistence
 import ar.edu.unq.lids.arq2.model.Shop
 import ar.edu.unq.lids.arq2.service.Resource
 import net.fwbrasil.activate.statement.Criteria
-import ar.edu.unq.lids.arq2.CartePriceActivateContext._
+import ar.edu.unq.lids.arq2.CarePriceActivateContext._
 
 //TODO esto esta en alpha
 

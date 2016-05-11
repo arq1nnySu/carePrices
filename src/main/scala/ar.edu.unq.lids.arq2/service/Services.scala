@@ -1,10 +1,11 @@
 package ar.edu.unq.lids.arq2.service
 
-import ar.edu.unq.lids.arq2.CartePriceActivateContext._
+import ar.edu.unq.lids.arq2.CarePriceActivateContext._
 import ar.edu.unq.lids.arq2.controllers.GenericResponse
 import ar.edu.unq.lids.arq2.exceptions.DuplicateResourceException
 import ar.edu.unq.lids.arq2.model.{Price, Product, Shop}
 import ar.edu.unq.lids.arq2.persistence.Repository
+
 import scala.collection.mutable.Map
 
 class ProductService extends ResourceService[Product, ProductDTO] {}

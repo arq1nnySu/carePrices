@@ -2,7 +2,7 @@ package ar.edu.unq.lids.arq2.service
 
 import java.lang.Double
 
-import ar.edu.unq.lids.arq2.CartePriceActivateContext._
+import ar.edu.unq.lids.arq2.CarePriceActivateContext._
 import ar.edu.unq.lids.arq2.model.{Price, Product, Shop}
 import ar.edu.unq.lids.arq2.utils.ScalaBeanUtils
 import com.fasterxml.jackson.annotation.JsonProperty
