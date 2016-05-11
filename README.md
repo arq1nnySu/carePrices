@@ -1,3 +1,7 @@
+
+[![Build Status](https://travis-ci.org/arq1nnySu/carePrices.svg)](https://travis-ci.org/arq1nnySu/carePrices)
+
+
 # Mirar para cuidar
 
 ## Instancia
