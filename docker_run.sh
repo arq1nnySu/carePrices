@@ -73,4 +73,4 @@ while [ "$#" -gt 0 ]; do
 done
 
 
-docker-compose -f docker/docker-compose.yml $database $cache up --build
+docker-compose -f docker/docker-compose.yml $database $cache up --build -d

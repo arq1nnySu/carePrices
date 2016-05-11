@@ -8,7 +8,7 @@ import ar.edu.unq.lids.arq2.utils.ScalaBeanUtils
 import com.fasterxml.jackson.annotation.JsonProperty
 import com.google.gson.Gson
 import com.twitter.finatra.json.internal.caseclass.validation.validators.NotEmptyInternal
-import com.twitter.finatra.request.QueryParam
+import com.twitter.finatra.request.{RouteParam, QueryParam}
 
 import scala.beans.BeanInfo
 import scala.reflect.ClassTag
@@ -85,3 +85,18 @@ class ShopDTO() extends DTO[Shop] {
 }
 
 case class ListRequest(@QueryParam var limit: Option[Int]= None, @QueryParam var offset: Option[Int]= None)
+
+
+case class PriceRequest(
+        @RouteParam var product_barcode: Option[String]= None,
+        @QueryParam var limit: Option[Int]= None,
+        @QueryParam var offset: Option[Int]= None,
+        @QueryParam var from: Option[String]= None,
+        @QueryParam var to: Option[String]= None,
+        @QueryParam var latitude: Option[String]= None,
+        @QueryParam var longitude: Option[String]=None,
+        @QueryParam var shop_id: Option[String]=None,
+        @QueryParam var shop_name: Option[String]=None,
+        @QueryParam var address: Option[String]=None,
+        @QueryParam var location: Option[String]=None
+      )

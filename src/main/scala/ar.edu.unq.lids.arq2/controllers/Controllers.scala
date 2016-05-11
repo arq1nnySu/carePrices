@@ -33,6 +33,10 @@ class PriceController extends ResourceController[Price, PriceDTO]{
 
   post("/found-prices")(save("found-prices"))
   post("/found-prices/:id")(byId)
+
+  get("/prices/average/:id"){ request: PriceRequest =>
+    response.ok.json(service.average(request).toJson)
+  }
 }
 
 @Singleton

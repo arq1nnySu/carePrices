@@ -26,8 +26,12 @@ class ResourceService[T<:Resource, D<:DTO[T]](implicit manifestT: Manifest[T], m
     repository.get(ff, value)
   }
 
-  def filter(limit:Option[Int], offset:Option[Int], filters:List[((T)=>String, Option[String])]) = transactional{
-    paginateResult(repository.filter(filters, limit, offset))
+  def paginatefilter(limit:Option[Int], offset:Option[Int], filters:List[((T)=>String, Option[String])]) = transactional{
+    paginateResult(filter[T](limit, offset, filters))
+  }
+
+  def filter[X](limit:Option[Int], offset:Option[Int], filters:List[((T)=>String, Option[String])], selectValue:(T)=>X = (t:T)=>t.asInstanceOf[X])(implicit tval1: (=> X) => StatementSelectValue) = transactional{
+    repository.filter(filters, limit, offset, selectValue)
   }
 
   def paginateResult(result:QueryResult[T]) = {

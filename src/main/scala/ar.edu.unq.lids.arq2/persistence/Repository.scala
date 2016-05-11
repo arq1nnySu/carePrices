@@ -11,7 +11,7 @@ class Repository[T<:Resource](implicit m: Manifest[T]) {
 
   def save(t:T) = t
 
-  def all(limit:Option[Int]=None, offset:Option[Int]=None) = filter(List(), limit, offset)
+  def all(limit:Option[Int]=None, offset:Option[Int]=None) = filter[T](List(), limit, offset)
 
   def get(ff:(T)=>String, value:StatementSelectValue): T = {
     dynamicQuery {
@@ -29,7 +29,7 @@ class Repository[T<:Resource](implicit m: Manifest[T]) {
     }
   }
 
-  def filter(filters:List[((T)=>String, Option[String])], limit:Option[Int]=None, offset:Option[Int]=None):QueryResult[T] = {
+  def filter[X](filters:List[((T)=>String, Option[String])], limit:Option[Int]=None, offset:Option[Int]=None, selectValue:(T)=>X = (t:T)=>t.asInstanceOf[X])(implicit tval1: (=> X) => StatementSelectValue):QueryResult[X] = {
     val queryLimit = limit.getOrElse(configuration.response.limitSize).min(configuration.response.maxLimitSize)
     val queryOffset = offset.getOrElse(0)
 
@@ -37,7 +37,7 @@ class Repository[T<:Resource](implicit m: Manifest[T]) {
 
     val total = dynamicQuery {(t:T) => commonWhere(t) select(1) orderBy(t.id)}.size
     val items = dynamicQuery {
-      (t:T) => { commonWhere(t) select(t) orderBy(t.id) limit(queryLimit) offset(queryOffset) }
+      (t:T) => { commonWhere(t) select(selectValue(t)) orderBy(t.id) limit(queryLimit) offset(queryOffset) }
     }
 
     QueryResult( items, queryLimit, queryOffset, total)
