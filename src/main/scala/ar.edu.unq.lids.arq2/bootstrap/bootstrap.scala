@@ -1,47 +1,10 @@
 package ar.edu.unq.lids.arq2.bootstrap
 
 import ar.edu.unq.lids.arq2.model.{Price, Shop, Product}
-import info.folone.scala.poi._
 import ar.edu.unq.lids.arq2.CarePriceActivateContext._
 
 object bootstrap {
-
-
-  def readFiles(): Unit ={
-    val wb = Workbook(getClass.getResourceAsStream("/products.xlsx"))
-      .fold(ex  ⇒ throw ex, identity).unsafePerformIO
-
-    val sheet = wb.sheets.head
-
-
-
-    for {
-      row <- sheet.rows
-      if(row.index >0)
-    } yield {
-      row.cells.foreach( cell =>{
-          cell match {
-            case StringCell(0, shopName) =>
-            case StringCell(1, productName) =>
-            case StringCell(2, productBrand) =>
-            case StringCell(5, productCategory) =>
-            case StringCell(6, northZone) =>
-            case StringCell(7, southZone) =>
-            case StringCell(8, unit) =>
-          }
-      })
-    }
-
-
-
-
-    print(sheet)
-  }
-
- transactional{
-//    readFiles()
- }
-
+  
   def data {
     val p1 = new Product("Tostadas Riera", "4646")
     val p2 = new Product("Jugo Tang", "7868678")
