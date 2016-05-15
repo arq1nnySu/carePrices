@@ -10,6 +10,10 @@
 ## Monitoreo
 * [NewRelic](https://rpm.newrelic.com/accounts/1280223/applications)
 
+## Logging
+* [Logentries](https://logentries.com/app/0ab5f9c6)
+
+
 ## Documentación de la API:
 * [API](http://docs.careprices.apiary.io/#reference/0/product/create-a-new-product?console=1)
 
@@ -192,27 +196,35 @@ Nuestra app corre en una imagen docker con las siguientes catacterísticas:
 * Ubuntu 15.10
 * Java 8
 
-Estamos usando `docker-compose` para describir algunas dependencias de imágenes:
-  * MongoDB
-  * Mysql
-  * Redis
+Las herramientas que estamos utilizando son:
+* `docker`
+* `docker-compose`
 
-Cada una de esas imágenes corre en un contenedor distinto que la app y se comunican por red.
-Lo que falta de configurar es pasar las variables de entorno  de nuestra app para configurar la base de datos a utilizar.
+Estamos utilizando además de nuestra imágen, las siguientes imágenes:
+* `MongoDB`
+* `Mysql`
+* `Redis`
 
-Lo que no sabemos bien es si es mejor tener un contenedor por servicio o todos los servicios en el mismo contenedor/imagen.
-
+Cada una de esas imágenes corre en un contenedor distinto y se las puede conectar por red.
 
 #### Levantar la imágen Docker
 
-Lavantar la imágen tenemos un script `docker_run.sh` que compila las imágenes y las levanta.
-Podemos configurar para que utilice la base de datos que querramos o si se quiere utilizar a redis como cache.
-Las formas son:
+Lo primero que tenemos que asegurarnos es que tenemos todas las imágenes que queremos utilizar.
+Para ello tenemos un script que baja y configura cada imágen:
 
-  * `docker_run.sh -d mysql` o `docker_run.sh --database=mysql` - Con esto nuestra app utiliza **mysql** como base de datos.
-  * `docker_run.sh -d mongo` o `docker_run.sh --database=mongo` - Con esto nuestra app utiliza **mongodb** como base de datos.
-  * `docker_run.sh -c redis` o `docker_run.sh --cache=redis` - Con esto nuestra app utiliza **redis** como cache.
-  * Tambien podemos combinar **mysql** con **redis** p **mongo** con **redis**: `docker_run.sh -d mongo -c redis`.
+* `sh build_image.sh careprices` - Baja la imágen de `Ubuntu` y la configura para poder correr ahí nuestra app.
+* `sh build_image.sh mongo` - Baja la imágen de `mongo`.
+* `sh build_image.sh mysql` - Baja la imágen de `mysql`.
+* `sh build_image.sh redis` - Baja la imágen de `redis`.
+
+Una vez que bajamos las imágenes que queremos utilizar, podemos levantarlas.
+Para ello también contamos con un script:
+
+  * `sh run_image.sh mongo -m 2G` - Levanta la imágen de mongo en un contenedor con 2 GB de ram
+  * `sh run_image.sh redis -m 1G` - Levanta la imágen de redis en un contenedor con 1 GB de ram.
+  * `sh run_image.sh careprices -m 2G ` - Levanta la imágen de la app en un 
+  contenedor con 2GB de ram. Si queremos usar mongo le agregamos los siguientes parámetros: `--link mongo -e "storage=mongo"`. 
+  Si queremos utilizar la cache de redis: `--link redis`
   
   
   
@@ -228,9 +240,6 @@ Para el monitoreo de la aplicación tenemos dos integraciones:
     muestra todas las transacciones en una, bajo el nombre de **/NettyDispatcher** (aparentemente es una limitación del framework elegido).
 
 * El segundo es utilizando la api de **newrelic** creamos un `filtro` para tracear todos los request y responses que realiza nuestra app.
- 
-Como contenido extra, tenemos mas info de el estado del servidor con una herramienta que de **Finagle** que esta levantada en el puerto `9990`.  
-
 
 
 ### Test de carga.
