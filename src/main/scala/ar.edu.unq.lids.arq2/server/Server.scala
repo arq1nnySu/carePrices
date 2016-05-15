@@ -16,7 +16,7 @@ object Server extends HttpServer {
 
   override val defaultFinatraHttpPort = configuration.server.port
 
-  override val disableAdminHttpServer = false
+  override val disableAdminHttpServer = true
 
   override def configureHttp(router: HttpRouter) {
     router

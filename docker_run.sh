@@ -2,6 +2,8 @@
 
 database=""
 cache=""
+app=""
+build=""
 
 function selectDataBase () {
     case $1 in
@@ -60,10 +62,33 @@ function showErrorCache(){
 	exit 1
 }
 
+
+function selectApp(){
+    case $1 in
+      "careprices") selectCareprices ;;
+      *) showErrorCareprices ;;
+    esac
+}
+
+function selectCareprices(){
+    echo -e "\e[01;33m!!!!!!!!!!!!!!!!!!!!   RUN APP  !!!!!!!!!!!!!!!!!!!!!\e[00m"
+    app=" -f docker/docker-compose.yml "
+    build=" --build "
+}
+
+function showErrorCareprices(){
+    echo -e "\e[01;33m!!!!!!!!!!!!!!!!!!!!  Error en el parametro -app !!!!!!!!!!!!!!!!!!!!!\e[00m"
+    echo "Las posibles opciones:"
+	echo "  * careprices"
+	echo ""
+	exit 1
+}
+
 while [ "$#" -gt 0 ]; do
   case "$1" in
     -d) database="$2"; selectDataBase $database; shift 2 ;;
     -c) cache="$2"; selectCache $cache; shift 2;;
+    -app) app="$2"; selectApp $app; shift 2;;
 
     --database=*) database="${1#*=}"; selectDataBase $database; shift 1;;
     --cache=*) cache="${1#*=}"; selectCache $cache; shift 1;;
@@ -73,4 +98,4 @@ while [ "$#" -gt 0 ]; do
 done
 
 
-docker-compose -f docker/docker-compose.yml $database $cache up --build -d
+docker-compose $app $database $cache up -d $build

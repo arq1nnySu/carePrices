@@ -2,7 +2,8 @@ version: '2'
 
 services:
   careprices:
-    build: .
+    build:
+      context: .
     ports:
       - "9200:9200"
       - "9990:9990"

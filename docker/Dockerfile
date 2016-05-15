@@ -1,9 +1,15 @@
 FROM beevelop/java
 
-ENV PORT 9200
 ENV log_key 52dfdbf5-a0b6-42af-9153-104f21bfa394
 ENV NEW_RELIC_LICENSE_KEY 4e1752d76b896584b362b30d4c8acf1f75a9bbb7
 ENV NEW_RELIC_APP_NAME Careprice (Developmnent)
+
+ENV mongo_host=mongo
+ENV redis_host=redis
+ENV mysql_url=jdbc:mysql://mysql:3306/
+ENV mysql_user=careprices
+ENV mysql_pwd=careprices
+ENV mysql_schema=careprices
 
 #NewRelic configuration
 RUN echo 'deb http://apt.newrelic.com/debian/ newrelic non-free' |  tee /etc/apt/sources.list.d/newrelic.list
@@ -20,6 +26,8 @@ ADD newrelic/newrelic.yml /opt/newrelic.yml
 
 ADD carePrices.jar /opt/
 ADD run.sh /opt/run.sh
+
+
 
 ENTRYPOINT ["sh", "/opt/run.sh"]
 

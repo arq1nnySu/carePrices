@@ -15,7 +15,7 @@ abstract class ResourceController[T <: Resource, D <:DTO[T]](implicit manifestT:
   def cache(request:Any) = cacheService.memorize(request.toString)_
 
   def all =  { request: ListRequest =>
-    val result = cache(request){service.all(request.limit, request.offset)}
+    val result = cache(s"${request.request.path}:$request"){service.all(request.limit, request.offset)}
     response.ok.json(result)
   }
 
@@ -23,6 +23,7 @@ abstract class ResourceController[T <: Resource, D <:DTO[T]](implicit manifestT:
     Try(service.save(dto)) match {
       case Success(resource) => response.created.location(s"/$endpoint/${resource.id.getOrElse("")}")
       case Failure(DuplicateResourceException(resource)) => response.conflict.location(s"/$endpoint/${resource.id}")
+      case Failure(x) => throw x
     }
 
   }

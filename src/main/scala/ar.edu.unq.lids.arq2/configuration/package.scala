@@ -49,3 +49,15 @@ package object configuration {
     }
   }
 }
+
+
+
+case class ConfigurationResponse(
+    environment:Object = configuration.environment,
+    server:Object = configuration.server,
+    response:Object = configuration.response,
+    database:Object = configuration.database,
+    mysql:Object = configuration.database.mysql,
+    mongo:Object = configuration.database.mongo,
+    redis:Object = configuration.database.redis
+  )

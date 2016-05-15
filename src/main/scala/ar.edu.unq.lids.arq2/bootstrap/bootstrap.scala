@@ -1,11 +1,10 @@
 package ar.edu.unq.lids.arq2.bootstrap
+
 import ar.edu.unq.lids.arq2.model.{Price, Shop, Product}
 import info.folone.scala.poi._
-
-//import com.twitter.finatra.http.HttpServer
 import ar.edu.unq.lids.arq2.CarePriceActivateContext._
 
-object bootstrap  extends App{
+object bootstrap {
 
 
   def readFiles(): Unit ={
@@ -21,7 +20,6 @@ object bootstrap  extends App{
       if(row.index >0)
     } yield {
       row.cells.foreach( cell =>{
-
           cell match {
             case StringCell(0, shopName) =>
             case StringCell(1, productName) =>
@@ -40,7 +38,6 @@ object bootstrap  extends App{
     print(sheet)
   }
 
-  import ar.edu.unq.lids.arq2.CartePriceActivateContext._
  transactional{
 //    readFiles()
  }

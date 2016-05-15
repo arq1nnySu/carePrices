@@ -1,14 +1,16 @@
 package ar.edu.unq.lids.arq2.service
 
 import java.lang.Double
+import javax.inject.Inject
 
 import ar.edu.unq.lids.arq2.CarePriceActivateContext._
 import ar.edu.unq.lids.arq2.model.{Price, Product, Shop}
 import ar.edu.unq.lids.arq2.utils.ScalaBeanUtils
 import com.fasterxml.jackson.annotation.JsonProperty
 import com.google.gson.Gson
+import com.twitter.finagle.http.Request
 import com.twitter.finatra.json.internal.caseclass.validation.validators.NotEmptyInternal
-import com.twitter.finatra.request.{RouteParam, QueryParam}
+import com.twitter.finatra.request.{JsonIgnoreBody, RouteParam, QueryParam}
 
 import scala.beans.BeanInfo
 import scala.reflect.ClassTag
@@ -72,8 +74,9 @@ case class ShopRequest(
   @QueryParam var longitude: Option[String]=None,
   @QueryParam var name: Option[String]=None,
   @QueryParam var address: Option[String]=None,
-  @QueryParam var location : Option[String]=None
-)
+  @QueryParam var location : Option[String]=None,
+  @JsonIgnoreBody @Inject var request:Request
+) extends RequestToString
 
 class ShopDTO() extends DTO[Shop] {
   var latitude: String =_
@@ -84,19 +87,36 @@ class ShopDTO() extends DTO[Shop] {
   var id:Option[String] = _
 }
 
-case class ListRequest(@QueryParam var limit: Option[Int]= None, @QueryParam var offset: Option[Int]= None)
+case class ListRequest(
+  @QueryParam var limit: Option[Int]= None,
+  @QueryParam var offset: Option[Int]= None,
+  @JsonIgnoreBody @Inject var request:Request
+)extends RequestToString
 
+case class PriceRequest (
+  @RouteParam var product_barcode: Option[String]= None,
+  @QueryParam var limit: Option[Int]= None,
+  @QueryParam var offset: Option[Int]= None,
+  @QueryParam var from: Option[String]= None,
+  @QueryParam var to: Option[String]= None,
+  @QueryParam var latitude: Option[String]= None,
+  @QueryParam var longitude: Option[String]=None,
+  @QueryParam var shop_id: Option[String]=None,
+  @QueryParam var shop_name: Option[String]=None,
+  @QueryParam var address: Option[String]=None,
+  @QueryParam var location: Option[String]=None,
+  @JsonIgnoreBody @Inject var request:Request
+) extends RequestToString
 
-case class PriceRequest(
-        @RouteParam var product_barcode: Option[String]= None,
-        @QueryParam var limit: Option[Int]= None,
-        @QueryParam var offset: Option[Int]= None,
-        @QueryParam var from: Option[String]= None,
-        @QueryParam var to: Option[String]= None,
-        @QueryParam var latitude: Option[String]= None,
-        @QueryParam var longitude: Option[String]=None,
-        @QueryParam var shop_id: Option[String]=None,
-        @QueryParam var shop_name: Option[String]=None,
-        @QueryParam var address: Option[String]=None,
-        @QueryParam var location: Option[String]=None
-      )
+trait RequestToString {
+
+  override def toString():String = {
+    val arguments = getClass.getDeclaredFields.map(field =>{
+      field.setAccessible(true)
+      field.get(this)
+    }).filter(!_.isInstanceOf[Request]).mkString("(", ",", ")")
+    val name = getClass.getSimpleName
+    name + arguments
+  }
+
+}
