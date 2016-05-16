@@ -41,7 +41,6 @@ libraryDependencies ++= Seq(
   "com.twitter.finatra" %% "finatra-httpclient" % versions.finatra,
   "com.twitter.finatra" %% "finatra-slf4j" % versions.finatra,
   "com.twitter.finatra" %% "finatra-jackson" % versions.finatra,
-  "com.github.rlazoti" %% "finagle-metrics" % versions.finagleMetrics,
   "net.fwbrasil" %% "activate-core" % versions.activateVersion,
   "net.fwbrasil" %% "activate-mongo-async" % versions.activateVersion,
   "net.fwbrasil" %% "activate-mongo" % versions.activateVersion,
