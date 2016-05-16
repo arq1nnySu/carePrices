@@ -54,10 +54,8 @@ libraryDependencies ++= Seq(
   "net.debasishg" %% "redisclient" % "3.0",
   "org.slf4j" % "slf4j-api" % "1.7.21",
   "ch.qos.logback" % "logback-classic" % "1.1.7",
-  "com.logentries" % "logentries-appender" % "1.1.32",
-  "info.folone" %% "poi-scala" % "0.15"
+  "com.logentries" % "logentries-appender" % "1.1.32"
 )
-
 
 mainClass := Some("ar.edu.unq.lids.arq2.server.Server")
 

@@ -2,28 +2,28 @@ image=$1
 name=$1
 port=''
 
-function runCareprices(){
+function runCareprices {
     echo -e "\e[01;33m!!!!!!!!!!!!!!!!!!!!   Running Careprices   !!!!!!!!!!!!!!!!!!!!!\e[00m"
     name="docker_careprices "
     port="9200:9200 -e PORT=9200"
 }
 
-function runMongo(){
+function runMongo {
     echo -e "\e[01;33m!!!!!!!!!!!!!!!!!!!!   Running mongo   !!!!!!!!!!!!!!!!!!!!!\e[00m"
     port="27017:27017"
 }
 
-function runMysql(){
+function runMysql {
     echo -e "\e[01;33m!!!!!!!!!!!!!!!!!!!!   Running Mysql   !!!!!!!!!!!!!!!!!!!!!\e[00m"
     port="3306:3306"
 }
 
-function runRedis(){
+function runRedis {
     echo -e "\e[01;33m!!!!!!!!!!!!!!!!!!!!   Building Redis   !!!!!!!!!!!!!!!!!!!!!\e[00m"
     port="6379:6379"
 }
 
-function showErrorImage(){
+function showErrorImage {
     echo -e "\e[01;33m!!!!!!!!!!!!!!!!!!!!  Error en el parametro  !!!!!!!!!!!!!!!!!!!!!\e[00m"
     echo "Las posibles opciones:"
 	echo "  * careprices"
