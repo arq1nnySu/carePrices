@@ -1,8 +1,11 @@
 package ar.edu.unq.lids.arq2.service
 
+import akka.actor.Status.Success
 import ar.edu.unq.lids.arq2.CarePriceActivateContext._
 import ar.edu.unq.lids.arq2.controllers.{ListResult, Paging}
+import ar.edu.unq.lids.arq2.exceptions.{InvalidRequest}
 import ar.edu.unq.lids.arq2.persistence.{QueryResult, Repository}
+import com.twitter.util.Try
 import net.fwbrasil.activate.statement.StatementSelectValue
 
 class ResourceService[T<:Resource, D<:DTO[T]](implicit manifestT: Manifest[T], manifestD: Manifest[D]){
@@ -22,8 +25,13 @@ class ResourceService[T<:Resource, D<:DTO[T]](implicit manifestT: Manifest[T], m
 
   }
 
-  def get(ff:(T)=>String, value:StatementSelectValue):Dto = transactional{
-    repository.get(ff, value)
+  def get(ff:(T)=>String, value:StatementSelectValue):Dto = getResource(ff, value)
+
+  def getResource(ff:(T)=>String, value:StatementSelectValue):T = transactional{
+    repository.get(ff, value) match{
+      case t:T => t
+      case null => throw new InvalidRequest()
+    }
   }
 
   def paginatefilter(limit:Option[Int], offset:Option[Int], filters:List[((T)=>String, Option[String])]) = transactional{

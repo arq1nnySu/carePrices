@@ -22,7 +22,7 @@ class ServerController extends Controller{
   }
 
   get("/") {request: Request =>
-    response.ok.body("It works!!")
+    response.ok.plain("It works!!").toFuture
   }
 }
 

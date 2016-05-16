@@ -23,7 +23,7 @@ object Server extends HttpServer {
       .filter[LoggingMDCFilter[Request, Response]]
       .filter[TraceIdMDCFilter[Request, Response]]
       .filter[NewRelicFilter]
-      .filter[CommonFilters]
+      .filter[ExceptionHandlerFilter]
       .add[ProductController]
       .add[ShopController]
       .add[PriceController]
