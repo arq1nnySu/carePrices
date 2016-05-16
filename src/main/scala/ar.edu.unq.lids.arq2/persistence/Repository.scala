@@ -18,7 +18,7 @@ class Repository[T<:Resource](implicit m: Manifest[T]) {
         (t: T) => {
           where(ff(t) :== value) select (t)
         }
-      }.head
+      }.headOption.getOrElse(null.asInstanceOf[T])
   }
 
   def filter(restriction: Restriction[T])  ={

@@ -19,8 +19,9 @@
         </encoder>
     </appender>
 
-    <root level="debug">
+    <root level="info">
         <appender-ref ref="LE" />
         <appender-ref ref="STDOUT" />
     </root>
+
 </configuration>

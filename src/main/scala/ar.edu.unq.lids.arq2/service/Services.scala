@@ -12,17 +12,17 @@ class ProductService extends ResourceService[Product, ProductDTO] {}
 
 class PriceService extends ResourceService[Price, PriceDTO] {
 
-  var shopRepository = new Repository[Shop]
+  var shopService = new ShopService
 
   override def save(pricedto: PriceDTO): PriceDTO = transactional {
-    val shop = shopRepository.get(_.id, pricedto.shop)
+    val shop = shopService.getResource(_.id, pricedto.shop)
     val price = new Price(shop, pricedto.product, pricedto.price, pricedto.datetime)
     repository.save(price)
   }
 
 
   def average(request:PriceRequest): GenericResponse = transactional{
-    val prices = filter(request.limit, request.offset, List[((Price) => String, Option[String])](
+    val prices = filter(Some(Integer.MAX_VALUE), Some(0), List[((Price) => String, Option[String])](
       (_.product, request.product_barcode),
       (_.shop.id, request.shop_id),
       (_.shop.name, request.shop_name),

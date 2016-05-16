@@ -1,9 +1,10 @@
 package ar.edu.unq.lids.arq2.controllers
 
 import javax.inject.Singleton
-import ar.edu.unq.lids.arq2.{ConfigurationResponse, BuildInfo}
+
 import ar.edu.unq.lids.arq2.model.{Price, Product, Shop}
 import ar.edu.unq.lids.arq2.service._
+import ar.edu.unq.lids.arq2.{BuildInfo, ConfigurationResponse}
 import com.twitter.finagle.http.{Request, Status}
 import com.twitter.finatra.http.Controller
 
@@ -21,8 +22,8 @@ class ServerController extends Controller {
     response.ok.json(ConfigurationResponse())
   }
 
-  get("/") { request: Request =>
-    response.ok.body("It works!!")
+  get("/") {request: Request =>
+    response.ok.plain("It works!!").toFuture
   }
 }
 
