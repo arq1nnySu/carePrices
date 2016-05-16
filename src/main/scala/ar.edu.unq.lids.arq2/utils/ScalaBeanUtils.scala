@@ -20,10 +20,10 @@ object ScalaBeanUtils {
 
     for {
       sourceDescriptor <- pdSource
-      value <- Try(propertyBean.getSimpleProperty(source, sourceDescriptor.getName)).toOption
-      targetDescriptor <- Try(getPropertyDescriptor(pdTarget, sourceDescriptor.getName)).toOption
+      value <- Try(sourceDescriptor.getReadMethod()).toOption
+      targetDescriptor <- pdTarget.find(_.getName == sourceDescriptor.getName)
     } yield {
-      copy(target, value, Option(targetDescriptor))
+      copy(target, value.invoke(source), Option(targetDescriptor))
     }
 
   }
@@ -37,7 +37,7 @@ object ScalaBeanUtils {
           case null => {}
           case x if descriptor.getPropertyType.isAssignableFrom(classOf[Option[_]]) => descriptor.getWriteMethod.invoke(target, Option(x))
           case x:Resource => descriptor.getWriteMethod.invoke(target, x.id)
-          case x => descriptor.getWriteMethod.invoke(target, x)
+          case x => Option(descriptor.getWriteMethod).map(_.invoke(target, x))
         }
       }
     }
