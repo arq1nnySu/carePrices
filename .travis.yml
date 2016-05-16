@@ -1,6 +1,12 @@
 language: scala
 scala:
-   - 2.11.8
-repo: arq1nnySu/carePrices
+- 2.11.8
+deploy:
+  provider: heroku
+  api_key:
+    secure: jf3W1yAHYaZoz724cumf+lByVwUvmHF+YyrGDNg7QEHttG75S3uB/VivCEwcd111LR6Gqf3/MEv9bom5ZXlLI6uYU3u0qFwfUK7xrnQO/Yr7KsLEBWm6RSbOv3w0vp3ThWvpswPI3+q6IIeIh+oW7kZTHCa9d09SI1DUpRGQds59WMPnOaO26TdlXjFFutUSVuvwc1JAiWcNuvz0r2LsyfGr8fAaaYohd5uJNdZxgVYthmG2uUZGlo/MaXGwP+RNXEg+kZNA6PY+o61k2g0TAQULaCLnuc5qTddOtSW0arOq6GOvb5Qw5tiXI51hrGf02jFBPj709codKoJ4NW2O23uOaw0LPdOPVbv/GfUN6vhyVLsv0VOL99XAlLzaTg26+HmddeJzi4dh4+8/PHQemxjimLmt/Tha+Tar59kWU4o4ajupGkdmwD0VG7BxBavGYdmm24izMyFDPvSEvOO22JQXtZMnqlOdw5nUTpNAOcDfOL4yWXfWVPPXblch20aSLuYJH8QfIzdB0khNBGr9JxCsjvbi7peXdh71rKDX5XFGhwv4UiihGq1ZBhXRJaDEIIDkVtTjDMEM8gXs1oGnEuVajy9x125Y+MqPpgyX0eV2+VN7FVnTX1P7wpirTau+4Mf5pbdUYJ8twreEMQ9tjb1SCBLShQx+KjcBt488keg=
+  app: careprices
+  on:
+    repo: arq1nnySu/carePrices
 script:
-   - sbt compile
+- sbt compile
