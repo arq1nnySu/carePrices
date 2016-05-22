@@ -30,7 +30,7 @@ class ServerController extends Controller {
 @Singleton
 class ProductController extends ResourceController[Product, ProductDTO] {
   get("/products")(all)
-  post("/products")(save("products"))
+  post("/products")(save("api/v1/products"))
   get("/products/:id")(byId)
 }
 
@@ -39,7 +39,7 @@ class PriceController extends ResourceController[Price, PriceDTO] {
   override val service = new PriceService
 
   get("/found-prices")(all)
-  post("/found-prices")(save("found-prices"))
+  post("/found-prices")(save("api/v1/found-prices"))
   get("/found-prices/:id")(byId)
 
   get("/prices/average/:id") { request: PriceRequest =>
@@ -56,9 +56,7 @@ class ShopController extends ResourceController[Shop, ShopDTO] {
       service.search(request)
     })
   }
-  post("/shops")(save("shops"))
+  post("/shops")(save("api/v1/shops"))
   get("/shops/:id")(byId)
 
 }
-
-
