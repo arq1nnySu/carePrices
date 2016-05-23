@@ -9,6 +9,9 @@ common: &default_settings
   enable_auto_app_naming: false
   enable_auto_transaction_naming: true
 
+  send_environment_info: true
+  send_jvm_props: true
+
   log_level: info
   audit_mode: false
   log_file_count: 1
