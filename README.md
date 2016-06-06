@@ -225,7 +225,14 @@ Para ello también contamos con un script:
   * `sh run_image.sh careprices -m 2G ` - Levanta la imágen de la app en un 
   contenedor con 2GB de ram. Si queremos usar mongo le agregamos los siguientes parámetros: `--link mongo -e "storage=mongo"`. 
   Si queremos utilizar la cache de redis: `--link redis`
-  
+
+Ahora con este mismo script podemos setear `hostname` y el `puerto` de la siguiente manera:
+
+  * `sh run_image.sh mongo -h mongoMaster` - Levanta la imágen de mongo con el hostname: mongoMaster.
+  * `sh run_image.sh redis -p 2345` - Levanta la imágen de redis en el puerto: 2345.
+  * `sh run_image.sh careprices -p 9300 -h careprices1` - Levanta la imágen de la app en el puerto 9300 con el hostname careprices1.
+
+  Si levantamos las imagenes sin ninguno de estos parametros, cada una de las imagenes tiene un puerto y un hostname por defecto.
   
   
 ### Monitoreo 
