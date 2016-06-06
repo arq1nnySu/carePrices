@@ -17,6 +17,12 @@ function buildRedis {
     echo -e "\e[01;33m!!!!!!!!!!!!!!!!!!!!   Building Redis   !!!!!!!!!!!!!!!!!!!!!\e[00m"
     docker pull redis
 }
+
+function buildMongos {
+    echo -e "\e[01;33m!!!!!!!!!!!!!!!!!!!!   Building Mongos   !!!!!!!!!!!!!!!!!!!!!\e[00m"
+    docker pull lgatica/mongos
+}
+
 function showErrorImage {
     echo -e "\e[01;33m!!!!!!!!!!!!!!!!!!!!  Error en el parametro  !!!!!!!!!!!!!!!!!!!!!\e[00m"
     echo "Las posibles opciones:"
@@ -30,6 +36,7 @@ function showErrorImage {
 case $image in
   "careprices") buildCareprices ;;
   "mongo") buildMongo ;;
+  "mongos") buildMongos ;;
   "mysql") buildMysql ;;
   "redis") buildRedis ;;
   *) showErrorImage ;;

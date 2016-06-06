@@ -39,6 +39,11 @@ common: &default_settings
     ignore_errors: akka.actor.ActorKilledException
     ignore_status_codes: 404
 
+
+  transaction_events:
+    enabled: true
+    max_samples_stored: 2000
+
   analytics_events:
 
     enabled: true
