@@ -2,18 +2,20 @@
 
 image=$1
 name=$1
-param=$2
+p2=$2
+p3=$4
+n=2
 
-if [ -z ${param} ]; then
-   p=$3; h=$5;
-else
-   if [ $param = -h ]; then
-      h=$3;
-   else
-      p=$3; h=$5; 
-   fi
-fi
-  
+case $p2 in
+  "-h") h=$3; n=4; ;;
+  "-p") p=$3; n=4; ;;
+esac
+
+case $p3 in
+  "-h") h=$5; n=6; ;;
+  "-p") p=$5; n=6; ;;
+esac
+
 function runCareprices {
     echo -e "\e[01;33m!!!!!!!!!!!!!!!!!!!!   Running Careprices   !!!!!!!!!!!!!!!!!!!!!\e[00m" 
     setHost "careprice"
@@ -84,8 +86,8 @@ case $image in
   *) showErrorImage ;;
 esac
 
-echo "docker run --name $image -p $port ${@:6} -h $host -d $name"
-docker run --name $image -p $port ${@:6} -h $host -d $name
+echo "docker run --name $image -p $port ${@:$n} -h $host -d $name"
+docker run --name $image -p $port ${@:$n} -h $host -d $name
 
 
 #--cpu-shares=0
