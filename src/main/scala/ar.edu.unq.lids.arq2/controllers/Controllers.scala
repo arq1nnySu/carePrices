@@ -29,20 +29,20 @@ class ServerController extends Controller {
 
 @Singleton
 class ProductController extends ResourceController[Product, ProductDTO] {
-  get("/products")(all)
-  post("/products")(save("api/v1/products"))
-  get("/products/:id")(byId)
+  get("/api/v1/products")(all)
+  post("/api/v1/products")(save("api/v1/products"))
+  get("/api/v1/products/:id")(byId)
 }
 
 @Singleton
 class PriceController extends ResourceController[Price, PriceDTO] {
   override val service = new PriceService
 
-  get("/found-prices")(all)
-  post("/found-prices")(save("api/v1/found-prices"))
-  get("/found-prices/:id")(byId)
+  get("/api/v1/found-prices")(all)
+  post("/api/v1/found-prices")(save("api/v1/found-prices"))
+  get("/api/v1/found-prices/:id")(byId)
 
-  get("/prices/average/:id") { request: PriceRequest =>
+  get("/api/v1/prices/average/:id") { request: PriceRequest =>
     response.ok.json(service.average(request).toJson)
   }
 }
@@ -51,12 +51,12 @@ class PriceController extends ResourceController[Price, PriceDTO] {
 class ShopController extends ResourceController[Shop, ShopDTO] {
   override val service = new ShopService
 
-  get("/shops") { request: ShopRequest =>
+  get("/api/v1/shops") { request: ShopRequest =>
     response.ok.json(cache(request) {
       service.search(request)
     })
   }
-  post("/shops")(save("api/v1/shops"))
-  get("/shops/:id")(byId)
+  post("/api/v1/shops")(save("api/v1/shops"))
+  get("/api/v1/shops/:id")(byId)
 
 }

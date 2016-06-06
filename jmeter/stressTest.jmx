@@ -9,12 +9,12 @@
         <collectionProp name="Arguments.arguments">
           <elementProp name="NUMBER_USERS" elementType="Argument">
             <stringProp name="Argument.name">NUMBER_USERS</stringProp>
-            <stringProp name="Argument.value">2000</stringProp>
+            <stringProp name="Argument.value">5000</stringProp>
             <stringProp name="Argument.metadata">=</stringProp>
           </elementProp>
           <elementProp name="USERS_RAMPUP" elementType="Argument">
             <stringProp name="Argument.name">USERS_RAMPUP</stringProp>
-            <stringProp name="Argument.value">30</stringProp>
+            <stringProp name="Argument.value">300</stringProp>
             <stringProp name="Argument.metadata">=</stringProp>
           </elementProp>
           <elementProp name="WEBAPP_HOST" elementType="Argument">
@@ -51,7 +51,7 @@
         <stringProp name="HTTPSampler.response_timeout"></stringProp>
         <stringProp name="HTTPSampler.protocol"></stringProp>
         <stringProp name="HTTPSampler.contentEncoding">UTF-8</stringProp>
-        <stringProp name="HTTPSampler.path"></stringProp>
+        <stringProp name="HTTPSampler.path">/api/v1</stringProp>
         <stringProp name="HTTPSampler.implementation">HttpClient3.1</stringProp>
         <stringProp name="HTTPSampler.concurrentPool">4</stringProp>
       </ConfigTestElement>
@@ -125,7 +125,7 @@
               <stringProp name="HTTPSampler.response_timeout"></stringProp>
               <stringProp name="HTTPSampler.protocol"></stringProp>
               <stringProp name="HTTPSampler.contentEncoding"></stringProp>
-              <stringProp name="HTTPSampler.path">/shops?limit=1</stringProp>
+              <stringProp name="HTTPSampler.path">/api/v1/shops?limit=1</stringProp>
               <stringProp name="HTTPSampler.method">GET</stringProp>
               <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
               <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
@@ -180,7 +180,7 @@ vars.put(&quot;shopId&quot;, shops.items[0].id);
               <stringProp name="HTTPSampler.response_timeout"></stringProp>
               <stringProp name="HTTPSampler.protocol"></stringProp>
               <stringProp name="HTTPSampler.contentEncoding"></stringProp>
-              <stringProp name="HTTPSampler.path">/found-prices</stringProp>
+              <stringProp name="HTTPSampler.path">/api/v1/found-prices</stringProp>
               <stringProp name="HTTPSampler.method">POST</stringProp>
               <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
               <boolProp name="HTTPSampler.auto_redirects">false</boolProp>

@@ -77,7 +77,7 @@ function showErrorImage {
 }
 
 case $image in
-  `expr match $image '\(careprices[0-9]\)'`) runCareprices ;;
+  *careprices*) runCareprices ;;
   "mongo") runMongo ;;
   "mysql") runMysql ;;
   "redis") runRedis ;;
@@ -91,9 +91,34 @@ docker run --name $image -p $port ${@:6} -h $host -d $name
 #--cpu-shares=0
 #-m=2g
 #sh run_image.sh careprices -m 2G --link mongo --link redis -e "storage=mongo"
-#docker run --name mongo1 -p 27017 -d mongo --replSet replSet --smallfiles
-#docker run -P --name mongos -p 27017:27017 --link mongo1 --link mongo2 --link mongo3  -d lgatica/mongos --configdb replSet/mongo1:27017,mongo2:27017,mongo3:27017
 
+#Ejecutar mongo con replica
+
+#docker run --name mongo  -h 172.17.0.5 -p 27017:27017 -d mongo --replSet rs1 --smallfiles --port 27017
+
+#docker run --name mongo_rs1_1 -h 172.17.0.2 -p 27017 -d mongo --replSet rs1 --smallfiles
+#docker run --name mongo_rs1_2 -h 172.17.0.3 -p 27017 -d mongo --replSet rs1 --smallfiles
+#docker run --name mongo_rs1_3 -h 172.17.0.4 -p 27017 -d mongo --replSet rs1 --smallfiles
+
+#docker run --name mongo_cfg1 -h  172.17.0.5 -p 27017 -d mongo --configsvr --replSet rs1 --dbpath /data/db --port 27017
+
+#docker run --name mongo_rs2_1 -h 172.17.0.6 -p 27017 -d mongo --replSet rs2 --smallfiles
+#docker run --name mongo_rs2_2 -h 172.17.0.7 -p 27017 -d mongo --replSet rs2 --smallfiles
+#docker run --name mongo_rs2_3 -h 172.17.0.8 -p 27017 -d mongo --replSet rs2 --smallfiles
+
+#docker run --name mongo_cfg2 -h  172.17.0.9 -p 27017 -d mongo --configsvr --replSet rs2 --dbpath /data/db --port 27017
+
+
+
+#docker run --name mongo -h  172.17.0.6 -p 27017:27017 -d lgatica/mongos --port 27017 --configdb 172.17.0.5:27017
+
+#docker run --name careprices -h careprices -p 9200:9200  --link mongo  -m 2G -e PORT=9200 -e storage=mongo -d docker_careprices
+
+#
 #rs.initiate()
 #rs.add("172.17.0.2:27017")
 #rs.add("172.17.0.3:27017")
+#rs.add("172.17.0.4:27017")
+
+#rs.add("172.17.0.6:27017")
+#rs.add("172.17.0.7:27017")
