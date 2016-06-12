@@ -124,3 +124,7 @@ docker run --name $image -p $port ${@:$n} -h $host -d $name
 
 #rs.add("172.17.0.6:27017")
 #rs.add("172.17.0.7:27017")
+
+#docker exec -i -t container_id bash
+
+#./run_image.sh careprices -h carepricesmaster -m=1G --cpu-shares=2 --link mongo -e "storage=mongo" --link redis
