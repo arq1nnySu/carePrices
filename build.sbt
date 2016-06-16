@@ -16,6 +16,7 @@ resolvers += "fwbrasil.net" at "http://repo1.maven.org/maven2"
 resolvers += "Sonatype Snapshots" at "https://oss.sonatype.org/content/repositories/snapshots/"
 resolvers += "Typesafe repository" at "https://dl.bintray.com/typesafe/maven-releases/"
 
+
 lazy val versions = new {
   val finatra = "2.1.5"
   val guice = "4.0"
@@ -26,6 +27,7 @@ lazy val versions = new {
 }
 
 lazy val careprices = (project in file(".")).
+  enablePlugins(GatlingPlugin).
   enablePlugins(BuildInfoPlugin).
   settings(
     buildInfoKeys := Seq[BuildInfoKey](name, version, scalaVersion, sbtVersion),
@@ -54,7 +56,9 @@ libraryDependencies ++= Seq(
   "net.debasishg" %% "redisclient" % "3.0",
   "org.slf4j" % "slf4j-api" % "1.7.21",
   "ch.qos.logback" % "logback-classic" % "1.1.7",
-  "com.logentries" % "logentries-appender" % "1.1.32"
+  "com.logentries" % "logentries-appender" % "1.1.32",
+  "io.gatling.highcharts" % "gatling-charts-highcharts" % "2.1.5" % "test",
+  "io.gatling" % "gatling-test-framework" % "2.1.5" % "test"
 )
 
 mainClass := Some("ar.edu.unq.lids.arq2.server.Server")
