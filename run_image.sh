@@ -33,11 +33,6 @@ function runMongo {
     host="$h"
 }
 
-function runMongos {
-    echo -e "\e[01;33m!!!!!!!!!!!!!!!!!!!!   Running mongos   !!!!!!!!!!!!!!!!!!!!!\e[00m"
-    port="27017:27017"
-}
-
 
 function runMysql {
     echo -e "\e[01;33m!!!!!!!!!!!!!!!!!!!!   Running Mysql   !!!!!!!!!!!!!!!!!!!!!\e[00m"
