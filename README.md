@@ -235,6 +235,30 @@ Ahora con este mismo script podemos setear `hostname` y el `puerto` de la siguie
   Si levantamos las imagenes sin ninguno de estos parametros, cada una de las imagenes tiene un puerto y un hostname por defecto.
   
   
+  Nuestros contenedores se crean en una red llamada `careprices` para que todos esten en la misma red.
+  A cada contenedor le configuramos un alias en la red para el dns interno.
+  Por ello, es posible que al levantar las imágenes tire un error de que la red ya esta creada, pero lo hacemos para que se cree si no existe.
+  
+#### Cluster de Mongo
+
+Tenemos un script `start_cluster.sh` que crea un cluster de mongo. A este script le podemos decir con que configuracion queremos levantar el cluster.
+Por default levanta la configuración: `docker/mongo/default.mongo.conf` que tiene el siguiente contenido:
+
+```bash
+     configs=2
+     replicas=3,3
+```
+
+Esto significa que:
+* Crea 3 instancias de Mongo Config Server
+* Crea 3 Replicas de 3 nodos caada una
+* Crea un sharding con las 3 replicas
+* Levanta el MongoS y lo deja listo para que nuestra app lo pueda usar.
+
+El diagrama del cluster quedaría asi:
+
+
+  
 ### Monitoreo 
 
 Tenemos integrado **newrelic** en la imagen de docker, para monitorear el server y en la app.<br/>
