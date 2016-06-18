@@ -245,8 +245,8 @@ Tenemos un script `start_cluster.sh` que crea un cluster de mongo. A este script
 Por default levanta la configuración: `docker/mongo/default.mongo.conf` que tiene el siguiente contenido:
 
 ```bash
-     configs=2
-     replicas=3,3
+     configs=3
+     replicas=3,3,3
 ```
 
 Esto significa que:
