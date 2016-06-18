@@ -280,6 +280,15 @@ Tenemos un plan de **JMeter** (en desarrollo) para poder medir el límite junto 
 una comparación de del rendimiento utilizando las distintas bases de datos e incluyendo o no la caché.<br/>
   El archivo esta en `jmeter/stressTest.jmx`
 
+### Test version Gatling - Report Tool
+
+Generamos un test de carga con Gatling que al final de la ejecucion crea una pagina de reporte con bastante feedback de la prueba.
+
+La estructura del test se encuentra en: `test/scala/stress`
+
+La pagina de reporte : 
+
+* [GatlingReport](https://arq1nnysu.github.io/)
 
 ### Logging
 

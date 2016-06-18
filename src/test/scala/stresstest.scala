@@ -3,7 +3,7 @@ import io.gatling.http.Predef._
 import io.gatling.http.request.StringBody
 import scala.concurrent.duration._
 
-class CrearUnShopYAgregarPrecios extends Simulation {
+class ConsultaShopsAgregarPrecios extends Simulation {
 
   val httpConf = http
     .baseURL("http://localhost:9200/api/v1")
@@ -42,7 +42,7 @@ class CrearUnShopYAgregarPrecios extends Simulation {
 
 
   val scncarepricesuser2 =
-    scenario("shop-found-prices[3]")
+    scenario("shop-found-prices[4]")
       .exec(http("shopRandom")
         .get("/shops")
         .queryParam("offset", "0")
@@ -79,7 +79,4 @@ class CrearUnShopYAgregarPrecios extends Simulation {
       atOnceUsers(10),
       rampUsers(10) over(5 minutes))
     .protocols(httpConf))
-
-
-  //setUp(scncarepricesuser1.inject(atOnceUsers(1))).protocols(httpConf)
 }
