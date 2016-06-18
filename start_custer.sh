@@ -58,6 +58,9 @@ do
 done
 rs_list+=($rs_connect)
 
+echo "sleep 10"
+sleep 10
+
 echo "replicas"
 for r in "${rs_list[@]}"
 do
