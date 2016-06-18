@@ -81,7 +81,7 @@ done
 echo "docker run --net=$net_name -itd --name mongo -h mongo.com --net-alias=mongo.com -p 27017:27017 -d lgatica/mongos --port 27017 --configdb $configdb"
 docker run --net=$net_name -itd --name mongo -h mongo.com --net-alias=mongo.com -p 27017:27017 -d lgatica/mongos --port 27017 --configdb rs$currentReplicaNumber/$configdb
 
-echo "sleep 10"
+echo "sleep 20"
 sleep 20
 
 echo "sharding"
