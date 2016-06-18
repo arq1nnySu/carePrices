@@ -257,7 +257,9 @@ Esto significa que:
 
 El diagrama del cluster quedaría asi:
 
+![Cluster de mongo][logo]
 
+[logo]: https://raw.githubusercontent.com/arq1nnySu/carePrices/master/docker/mongo/cluster_image.png 
   
 ### Monitoreo 
 
