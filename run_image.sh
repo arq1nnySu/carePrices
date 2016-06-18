@@ -82,7 +82,8 @@ case $image in
 esac
 
 echo "docker run --name $image -p $port ${@:$n} -h $host -d $name"
-docker run --name $image -p $port ${@:$n} -h $host -d $name
+docker network create -d bridge --subnet 172.25.0.0/16 careprices
+docker run  --net=careprices  --name $image -p $port ${@:$n} -h $host -d $name
 
 
 #--cpu-shares=0
