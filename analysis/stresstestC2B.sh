@@ -10,19 +10,6 @@
 
 ../run_image.sh redis
 
-# Ahora si estamos listos para levantar la app como pide el Caso 1A: Pruebas de stress:
+# Levantamos la app careprices y la conectamos con mongo y redis 
 
-# TODO preguntar porque no puedo setear el tamanio de swap 
-sleep 20
-
-# v1 config CPU
-
-../run_image.sh careprices -h carepricesC2B --link mongo -e "storage=mongo" --link redis -m 300M --cpu-shares=1
-
-# v2 config CPU
-
-#../run_image.sh careprices -h carepricesmaster --link mongo -e "storage=mongo" --link redis -m 300M --cpu-period=1
-
-# v3 config cpu
-
-#../run_image.sh careprices -h carepricesmaster --link mongo -e "storage=mongo" --link redis -m 300M --cpu-quota=1
+../run_image.sh careprices -h carepricesC2B --link mongo -e "storage=mongo" --link redis -m 1G --cpuset-cpus="0"

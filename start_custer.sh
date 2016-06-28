@@ -7,7 +7,7 @@ else
     configFile=default.mongo.config.ini
 fi
 
-. docker/mongo/$configFile
+. ../docker/mongo/$configFile
 
 #echo "${configs}   ${replicas}"
 
