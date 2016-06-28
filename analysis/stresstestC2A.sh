@@ -17,7 +17,7 @@ sleep 20
 
 # v1 config CPU
 
-../run_image.sh careprices -h carepricesC2A --link mongo -e "storage=mongo" --link redis -m 300M --cpu-shares=1
+../run_image.sh careprices -h carepricesC2A --link mongo -e "storage=mongo" --link redis -m 1G --cpu-shares=1
 
 # v2 config CPU
 
