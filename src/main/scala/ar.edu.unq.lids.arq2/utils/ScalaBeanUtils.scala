@@ -33,7 +33,9 @@ object ScalaBeanUtils {
       case None => {}
       case Some(descriptor) => {
         value match{
-          case o:Option[Object] => descriptor.getWriteMethod.invoke(target, o.getOrElse(null))
+          case o:Option[Object] => {
+            if(descriptor.getWriteMethod != null) descriptor.getWriteMethod.invoke(target, o.getOrElse(null))
+          }
           case null => {}
           case x if descriptor.getPropertyType.isAssignableFrom(classOf[Option[_]]) => descriptor.getWriteMethod.invoke(target, Option(x))
           case x:Resource => descriptor.getWriteMethod.invoke(target, x.id)
@@ -55,7 +57,11 @@ object ScalaBeanUtils {
     null
   }
 
-  private def getPropertyDescriptors(beanInfo: BeanInfo): Array[PropertyDescriptor] = {
+  def getPropertyDescriptors(target: Object): Array[PropertyDescriptor] = {
+    getPropertyDescriptors(Introspector.getBeanInfo(target.getClass))
+  }
+
+  def getPropertyDescriptors(beanInfo: BeanInfo): Array[PropertyDescriptor] = {
     val propertyDescriptors = new TreeMap[String, PropertyDescriptor](new PropertyNameComparator())
     for (pd <- beanInfo.getPropertyDescriptors) {
       propertyDescriptors.put(pd.getName, pd)

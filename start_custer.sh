@@ -93,3 +93,5 @@ do
     echo "mongo localhost:27017 --eval \"sh.addShard('$t');\""
     mongo localhost:27017 --eval "sh.addShard('$t');"
 done
+
+# docker volume rm $(docker volume ls -qf dangling=true)

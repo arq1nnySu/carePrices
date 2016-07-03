@@ -58,7 +58,8 @@ libraryDependencies ++= Seq(
   "ch.qos.logback" % "logback-classic" % "1.1.7",
   "com.logentries" % "logentries-appender" % "1.1.32",
   "io.gatling.highcharts" % "gatling-charts-highcharts" % "2.1.5" % "test",
-  "io.gatling" % "gatling-test-framework" % "2.1.5" % "test"
+  "io.gatling" % "gatling-test-framework" % "2.1.5" % "test",
+  "org.scalaj" %% "scalaj-http" % "2.3.0"  % "test"
 )
 
 mainClass := Some("ar.edu.unq.lids.arq2.server.Server")

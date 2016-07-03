@@ -6,6 +6,7 @@ import ar.edu.unq.lids.arq2.controllers.{ListResult, Paging}
 import ar.edu.unq.lids.arq2.exceptions.{InvalidRequest}
 import ar.edu.unq.lids.arq2.persistence.{QueryResult, Repository}
 import com.twitter.util.Try
+import scala.collection.JavaConversions._
 import net.fwbrasil.activate.statement.StatementSelectValue
 
 class ResourceService[T<:Resource, D<:DTO[T]](implicit manifestT: Manifest[T], manifestD: Manifest[D]){
