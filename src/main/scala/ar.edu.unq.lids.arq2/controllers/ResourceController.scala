@@ -57,5 +57,5 @@ class ExceptionHandlerFilter @Inject()( exceptionManager: ExceptionManager, resp
 }
 
 
-case class ListResult[T](items:List[T], paging:Paging)
+case class ListResult[T](items:java.util.List[T], paging:Paging)
 case class Paging(limit:Int, offset:Int, total:Int)
