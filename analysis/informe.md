@@ -22,6 +22,16 @@ Caso de stress 1B:
 - 2 CPU
 - 1 Nodo BD
 
+Uso de CPU / 
+uso de Memoria / 
+RPM /
+Tiempo de Respuesta (persentiles) 
+I/O Red + Latens / 
+Conexiones a DB /
+WS   
+----------------------------------------------------------------
+
+
 Caso de stress 2A: 
 - Necesitamos levantar 1 nodo virtual de nuestra app.
 - 1 CPU
