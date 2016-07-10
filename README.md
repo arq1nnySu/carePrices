@@ -288,7 +288,7 @@ La estructura del test se encuentra en: `test/scala/stress`
 
 La pagina de reporte : 
 
-* [GatlingReport](https://arq1nnysu.github.io/)
+* [Stress Test](https://github.com/arq1nnySu/carePrices/wiki/Stress-Test)
 
 ### Logging
 
