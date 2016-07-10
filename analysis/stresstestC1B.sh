@@ -16,4 +16,4 @@ docker network create -d bridge --subnet 172.25.0.0/16 careprices
 
 # Levantamos la app careprices y la conectamos con mongo y redis 
 
-../run_image.sh careprices -h carepricesC1B --link mongo -e "storage=mongo" --link redis -m 1G --cpuset-cpus=="0,1" #--cpu-shares=
+../run_image.sh careprices -h carepricesC1B --link mongo -e "storage=mongo" --link redis -m 1G --cpuset-cpus="0,1" #--cpu-shares=
