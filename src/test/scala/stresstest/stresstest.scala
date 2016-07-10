@@ -6,11 +6,13 @@ import io.gatling.http.request.StringBody
 import stresstest.TestConfig._
 import scala.concurrent.duration._
 
-class ConsultaShopsAgregarPrecios extends Simulation {
+class Stresstest extends Simulation {
 
   DownloadFeeders.loadFeeders()
   lazy val shopsFeeder = csv("shops.csv").random
   lazy val productsFeeder = csv("products.csv").random
+  val random = new util.Random
+  val randomFeeder = Iterator.continually(Map("value" -> random.alphanumeric.take(20).mkString(""), "price" -> random.nextInt(100)))
 
   val httpConf = http
     .baseURL(TestConfig.fullHost)
@@ -23,26 +25,26 @@ class ConsultaShopsAgregarPrecios extends Simulation {
 
   object Product {
     lazy val operations = exec(http("List Products")
-      .get("products"))
-      .feed(productsFeeder)
+      .get(TestConfig.fullHost+"products"))
+      .feed(randomFeeder)
       .exec(http("Post Product")
-        .post("products")
+        .post("http://192.168.0.28:9200/api/v1/products")
         .headers(headersApi)
-        .body(new StringBody("""{ "id":"${product_id}","name":"${product_name}", "barcode":"${product_barcode}" }""")).asJSON
+        .body(new StringBody("""{"name":"${value}", "barcode":"${value}" }""")).asJSON
         .check(status.is(201))
       )
   }
 
   object Shops {
     lazy val operations = exec(http("List Shops")
-      .get("shops"))
-      .feed(shopsFeeder)
+      .get(TestConfig.fullHost+"shops"))
+      .feed(randomFeeder)
       .exec(http("Post Shop")
-        .post("shops")
+        .post("http://192.168.0.28:9200/api/v1/shops")
         .headers(headersApi)
         .body(new StringBody("""{
-            "id":"${shop_id}","name":"${shop_name}","latitude":"${shop_latitude}","longitude":"${shop_longitude}",
-            "address":"${shop_address}","location":"${shop_location}","chain":"${shop_chain}" }""")).asJSON
+            "name":"${value}","latitude":"${value}","longitude":"${value}",
+            "address":"${value}","location":"${value}","chain":"${value}" }""")).asJSON
         .check(status.is(201))
       )
   }
@@ -52,10 +54,11 @@ class ConsultaShopsAgregarPrecios extends Simulation {
       .get("found-prices"))
       .feed(shopsFeeder)
       .feed(productsFeeder)
+      .feed(randomFeeder)
       .exec(http("Post Price")
         .post("found-prices")
         .headers(headersApi)
-        .body(new StringBody("""{"shop_id": "${shop_id}", "product_id": "${product_id}","price": 30, "datetime": "2016-04-02T15:51:15-03:00"}""")).asJSON
+        .body(new StringBody("""{"shop_id": "${shop_id}", "product_id": "${product_id}","price": ${price}, "datetime": "2016-04-02T15:51:15-03:00"}""")).asJSON
         .check(status.is(201))
       )
   }
@@ -64,13 +67,11 @@ class ConsultaShopsAgregarPrecios extends Simulation {
   val shops = scenario("Shops Operations").exec(Shops.operations)
   val prices = scenario("Prices Operations").exec(Price.operations)
 
+
+
   setUp(
-//    products.inject(atOnceUsers(5)),
-//    shops.inject(atOnceUsers(5)),
-      prices.inject(atOnceUsers(5), rampUsersPerSec(10) to 200 during(10 minutes))
-//    .inject(
-//      atOnceUsers(30),
-//      rampUsers(50) over(1 seconds),
-//      constantUsersPerSec(200) during(5 minutes))
+      products.inject(rampUsersPerSec(5) to 10 during(10 minutes)),
+      shops.inject(   rampUsersPerSec(5) to 10 during(10 minutes)),
+      prices.inject( rampUsersPerSec(10) to (150) during(10 minutes))
     .protocols(httpConf))
 }
